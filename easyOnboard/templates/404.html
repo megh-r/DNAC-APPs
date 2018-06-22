@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block bodyblock %}
+<h2 style="text-align: center;">404: Page not found</h2>
+<br>
+<div style="text-align: center; ">
+    <p>Whoops! Looks like you got a little lost. No worries.</p>
+    <p>{{ data }}</p>
+    <p>Please click the following link to be redirected to the index page</p>
+    <a href={% url 'index' %}>Way back home</a>
+</div>
+{% endblock %}

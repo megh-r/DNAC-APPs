@@ -1,0 +1,438 @@
+{% extends "base.html" %}
+{% load static %}
+{% block bodyblock %}
+
+<h2 style="text-align: center;">Project List</h2>
+
+
+   <div class="float-right" style="padding-right: 10px">
+    <a data-toggle="modal" data-target="#projectadd" class="link_hi"><i class="fas fa-plus"></i> Add Project</a>
+
+        <div id="projectadd" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Project Information</h4>
+                    <div style=" position: relative;
+    text-align: center;
+    color: black;">
+
+                    <img class="loaderImage" src="{% static "img/loading.gif" %}"><div class="loaderImage" style="position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);">Please Wait
+                </div>
+                </div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                    <label  class="col-sm-2 control-label">Project</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="pName" placeholder="Enter the Project Name"/>
+                    </div>
+                  </div>
+                    <div class="form-group">
+    <label class="col-sm-2 control-label">Select&nbsp;OUs</label>
+                     <div class="col-sm-10">
+    <select multiple class="form-control" id="sel">
+        {% for project in allprojects %}
+            {% if not project.associated and not project.inVN%}
+                  <option value={{project.projectName}}>{{project.projectName}}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+                     </div>
+  </div>
+
+                </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="mulbtn" onclick="getOUS()">Add Project</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+<br>
+
+
+    <table id="example" class="display component table table-striped " cellspacing="0" >
+<!--<table class="table table-hover  results table-striped component">
+    -->
+    <thead><tr>
+        <th style="width: 70%;">Projects</th>
+        <th>Associate</th>
+        <th>Disassociate</th>
+    </tr>
+    </thead>
+        <tbody>
+
+
+        {%  for project in allprojects %}
+            {% if not project.inVN %}
+            <tr>
+
+                <td><a class="link_hi" data-toggle="modal" data-target="#detailprojectModal{{ project.projectName }}">{{ project.projectName }}</a></td>
+                {% if project.associated %}
+                <td><a class="not-active" data-toggle="modal" data-target="#editprojectModal{{ project.projectName }}"><i class="fas fa-plus-circle"></i>Associate</a></td>
+                <td><a class="link_hi" data-toggle="modal" data-target="#deleteprojectModal{{ project.projectName }}"><i class="fas fa-minus-circle"></i> Disassociate</a></td>
+
+                {% else %}
+                <td><a class="link_hi" data-toggle="modal" data-target="#editprojectModal{{ project.projectName }}"><i class="fas fa-plus-circle"></i>Associate</a></td>
+                <td><a class="not-active" data-toggle="modal" data-target="#deleteprojectModal{{ project.projectName }}"><i class="fas fa-minus-circle"></i> Disassociate</a></td>
+
+                {% endif %}
+
+
+
+<div id="detailprojectModal{{ project.projectName }}" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Project Information</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="form-group">
+                        <p><b>Project Name</b> : &nbsp {{ project.projectName }}</p>
+                    </div>
+                </div>
+
+                <div class="input-group" >
+                    <div class="form-group">
+                        {% if project.VN %}
+                        <p><b>OUs Associated</b> : </p>
+                            <ul>
+                            {% for vn in project.VN %}
+                            <li>{{ vn }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="input-group" >
+                    <div class="form-group">
+                        {% if project.ipPool %}
+                        <p><b>IP Pool Associated</b> : &nbsp {{ project.ipPool }}</p>
+                        {% else %}
+                        <p><b>IP Pool Associated</b> : &nbsp No Ip Pool Associated</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="form-group">
+                        {% if project.vlanId %}
+                        <p><b>VLAN Associated</b> : &nbsp {{ project.vlanId }}</p>
+                        {% else %}
+                        <p><b>VLAN Associated</b> : &nbsp No VLAN Associated</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="input-group" >
+                    <div class="form-group">
+                        <p><b>User Types :</b></p>
+                        <ul>
+                            {% for group in project.userType %}
+                            <li>
+                                <div style="float:left !important;">{{ group.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </div>
+                                {% if group.sgt_value %}
+                                <div style="float:right !important;">SGT value: {{ group.sgt_value }}</div>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                            <br>
+                        </ul>
+                    </div>
+                        {% if project.associated %}
+
+                            <button type="button" class="float-right" style="background:none!important;
+     border:none;
+     padding-left:35px!important;
+
+    /*optional*/
+    font-family:arial,sans-serif; /*input has OS specific font-family*/
+     color:#6CC04A;
+     cursor:pointer;" onclick='refreshProject("{{ project }}")' data-toggle="tooltip" data-placement="right" title="Please Add New Groups to ISE Before Refreshing and Refresh After Deleting Groups from AD"><i class="fas fa-sync-alt"></i>Refresh</button>
+                            <a href="https://10.106.23.230/admin/#workcenters/workcenter_guest_access/workcenter_guest_access_external_identity_sources" target="_blank" data-toggle="tooltip" data-placement="left" title="Navigate to AD and select groups under the AD and add the groups to be refreshed.">Add Groups to ISE</a>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <a href="https://10.106.23.221/dna/policy/home?st-host_policy=policy_administration" target="_blank" class="float-right">Add Policies to DNAC</a>
+                        {% endif %}
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="editprojectModal{{ project.projectName }}" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Associate Project</h4><br><div style=" position: relative;
+    text-align: center;
+    color: black;">
+
+                    <img class="loaderImage" src="{% static "img/loading.gif" %}"><div class="loaderImage" style="position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);">Please Wait
+                </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="input-group" style="margin-bottom: 10px" >
+                    <div class="form-group">
+                        <p><b>Project Name</b> : &nbsp {{ project.projectName }}</p>
+                    </div>
+
+                </div>
+                <div class="input-group" style="margin-bottom: 10px" >
+                    <div class="form-group">
+                        <p><b>Steps Involved:</b></p>
+                        <ol>
+                            <li style="font-size: small"><b>Creating SGT (ISE)</b>: https://&lt;ise-ip&gt;:9060/ers/config/sgt</li>
+                            <li style="font-size: small"><b>Creating Authorization Rule (ISE)</b>: https://&lt;ise-ip&gt;:9060/ers/config/authorizationrule</li>
+                            <li style="font-size: small"><b>Authorization (DNAC)</b>: https://&lt;dnac-ip&gt;/api/system/v1/auth/login</li>
+                            <li style="font-size: small"><b>Getting Scalable Groups (DNAC)</b>: https://&lt;dnac-ip&gt;/api/v2/data/customer-facing-service/scalablegroup</li>
+                            <li style="font-size: small"><b>Creating VN (DNAC)</b>: https://&lt;dnac-ip&gt;/api/v2/data/customer-facing-service/virtualnetworkcontext</li>
+                            <li style="font-size: small"><b>Getting Information from IPAM (IPAM)</b>: </li>
+                            <li style="font-size: small"><b>Create IP Pool (DNAC)</b>: https://&lt;dnac-ip&gt;/api/v2/ippool</li>
+                            <li style="font-size: small"><b>Associating VN to IP Pool (DNAC)</b>: https://&lt;dnac-ip&gt;/api/v2/data/customer-facing-service/VirtualNetwork</li>
+                        </ol>
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success associatebtn" onclick='associateProject("{{ project }}")'>Associate project</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="deleteprojectModal{{ project.projectName }}" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Disassociate Project</h4>
+<div style=" position: relative;
+    text-align: center;
+    color: black;">
+
+                    <img class="loaderImage" src="{% static "img/loading.gif" %}"><div class="loaderImage" style="position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);">Please Wait
+                </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="input-group" style="margin-bottom: 10px" >
+                    <div class="form-group">
+                        <p><b>Project Name</b> : &nbsp {{ project.projectName }}</p>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-bottom: 10px" >
+                    <div class="form-group">
+                        <p><b>Steps Involved:</b></p>
+                        <ol>
+                            <li><b>Unlinking the Ip pool from VN (DNAC)</b>: https://&lt;dnac-ip&gt;/api/v2/data/customer-facing-service/VirtualNetwork</li>
+                            <li><b>Removing the VN Created (DNAC)</b>: https://&lt;dnac-ip&gt;/api/v2/data/customer-facing-service/virtualnetworkcontext/</li>
+                            <li><b>Deleting the Authorization Rule (ISE)</b>: https://&lt;ise-ip&gt;:9060/ers/config/authorizationrule</li>
+                            <li><b>Deleting the SGT (ISE)</b>: https://&lt;ise-ip&gt;:9060/ers/config/sgt/</li>
+                            <li><b>Delete IP Pool (DNAC)</b>: https://&lt;dnac-ip&gt;/api/v2/ippool</li>
+                        </ol>
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success disassociatebtn" onclick='disassociateProject("{{ project }}")'>Disassociate Project</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+            </tr>
+            {% endif %}
+      {% endfor %}
+    </tbody>
+    </table>
+
+<script>
+    /*$("#name").change(function () {
+      var username = $(this).val() ;
+
+      $.ajax({
+        url: '/ajax/validate_username/',
+        data: {
+          'username': username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+            $('#name').val("");
+          }
+        }
+      });
+
+    });
+
+    function projectadd() {
+
+    var name=$('#name').val();
+    $.ajax({
+        url: '/createproject/',
+        type: 'get',
+        data: {
+            name: name,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+            alert(response.msg);
+            window.location = '/index/'
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+    });}
+
+    */
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+    $('.loaderImage').hide();
+});
+function associateProject(project, projectname) {
+//alert(project);
+$('.loaderImage').show();
+$(".associatebtn").prop("disabled", true);
+    $.ajax({
+        url: '/associateProject/',
+        type: 'get',
+        data: {
+            project:project,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+            $('.loaderImage').hide();
+
+        $(".associatebtn").prop("disabled", false);
+            alert(response.msg);
+            window.location = '/index/'
+
+        },
+        error: function (xhr, status, error) {
+            $('.loaderImage').hide();
+
+        $(".associatebtn").prop("disabled", false);
+            alert(xhr.responseJSON['status_code']+ " ERROR: "+ xhr.responseJSON['err']);
+            window.location = '/index/'
+        }
+    });    }
+    function disassociateProject(project,projectname) {
+//alert(project);
+$('.loaderImage').show();
+
+        $(".disassociatebtn").prop("disabled", true);
+    $.ajax({
+        url: '/disassociateProject/',
+        type: 'get',
+        data: {
+            project:project,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+
+$('.loaderImage').hide();
+$(".disassociatebtn").prop("disabled", false);
+            alert(response.msg);
+            window.location = '/index/'
+        },
+        error: function (xhr, status, error) {
+            $('.loaderImage').hide();
+$(".disassociatebtn").prop("disabled", false);
+            alert(xhr.responseJSON['status_code']+ " ERROR: "+ xhr.responseJSON['err']);
+            window.location = '/index/'
+        }
+    });    }
+
+
+    function refreshProject(project) {
+//alert(project);
+    $.ajax({
+        url: '/refreshProject/',
+        type: 'get',
+        data: {
+            project:project,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+            alert(response.msg);
+            window.location = '/index/'
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+    });    }
+
+
+    function getOUS() {
+ var x=document.getElementById("sel");
+ var arr=[];
+  for (var i = 0; i < x.options.length; i++) {
+     if(x.options[i].selected){
+          arr.push(x.options[i].value);
+      }
+  }
+  var projectName = document.getElementById("pName").value;
+  //alert(projectName);
+  //alert (arr);
+    //alert(project);
+
+$("#mulbtn").prop("disabled", true);
+
+$('.loaderImage').show();
+    $.ajax({
+        url: '/multipleOUs/',
+        type: 'get',
+        data: {
+            projectName:projectName,
+            oulist: arr,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+
+$('.loaderImage').hide();
+$("#mulbtn").prop("disabled", false);
+            alert(response.msg);
+            window.location = '/index/'
+        },
+        error: function (xhr, status, error) {
+
+$('.loaderImage').hide();
+$("#mulbtn").prop("disabled", false);
+            alert(xhr.responseText);
+        }
+    });
+}
+</script>
+{% endblock %}
