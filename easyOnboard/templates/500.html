@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block bodyblock %}
+<h2 style="text-align: center;">Internal Server Error</h2>
+
+<div style="text-align: center;">
+<p>Something went wrong. please check the DNAC and ISE to see the errors</p>
+    <p>The traceback error message is: {{ exception_value }}</p>
+    <p>If the error message is <i>"local variable 'sgt_id' referenced before assignment"</i> or <i>"list index out of range"</i> <br>Please refresh your page as it took longer to update your information in the DNAC than expected.</p>
+</div>
+{% endblock %}
