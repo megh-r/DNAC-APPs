@@ -23,7 +23,7 @@ This folder contains that django application for the EasyonBoard Apllication.
 
 Points to be noted:
   - For using the refresh option, the page has to be first refreshed. 
-  - The logic of polling the response to find has not been implemented and instead a ```time.sleep()``` has been used. This may result in an error. To fix this error, check the steps that have been completed till now. If the authorization rules haven't been created yet, then the error must have been that we were trying to get the information before the DNAC finished pushing it. 
+  - The logic of polling the response to find has not been implemented and instead a ```time.sleep()``` has been used. This may result in an error. To fix this error, check the steps that have been completed till now. If the authorization rules haven't been created yet, then the error must have been that we were trying to get the information before the DNAC finished pushing it. (More specifically, the DNAC did not finish associating the IP with the VN which has caused this problem)
 
     1. Go to the DNAC and unlink the IP from the VN if it is linked
     2. Delete the VN using the API (https://<dnac-ip>/api/v2/data/customer-facing-service/VirtualNetwork/<vn-id>)
@@ -34,9 +34,10 @@ Points to be noted:
   - If the authorization rule has been created
     1. First delete the authorization rules created.
     2. Delete the autorization profile for the rule using api (https://<ise-ip>:9060/ers/config/authorizationprofile/<authorizationprofile-id>)
-    3.  Go to the DNAC and unlink the IP from the VN if it is linked
-    4.  Delete the VN using the API (https://<dnac-ip>/api/v2/data/customer-facing-service/VirtualNetwork/<vn-id>
-    5.  Delete the IP Address pool created.
-    6.  Go to ISE and delete the SGTs created.
+    3. Go to the DNAC and unlink the IP from the VN if it is linked
+    4. Delete the VN using the API (https://<dnac-ip>/api/v2/data/customer-facing-service/VirtualNetwork/<vn-id>
+    5. Delete the IP Address pool created.
+    6. Go to ISE and delete the SGTs created.
     
-After you are done with this, you can increase the ```time.sleep(60)``` on line 605 and try again.
+After you are done with this, you can increase the ```time.sleep(60)``` on line 605 in ```views.py``` and try again.
+  
