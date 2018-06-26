@@ -1,0 +1,60 @@
+.dashed_box{
+	
+	margin-right:20px;margin-left:40px;border: 1px dashed;padding:10px
+}
+a {	text-decoration: none; font-weight: bold; }
+xmp { padding: 0px; margin: 0px; }
+
+.tableColored { width: 100%; }
+.tableColored tr:nth-child(even) { background: #CCC; }
+.tableColored tr:nth-child(odd) { background: #FFF; }
+
+.contentDiv { 
+	display: none;
+	z-index: 1000;
+	width: 800px;
+	height: 400px;
+	overflow: auto;
+	position: fixed;
+	top: 70px;
+	left: 150px;
+	border: 2px solid grey;
+	padding: 10px;
+	background: white;
+}
+
+.textCentered { text-align: center; }
+.responseDiv { height: 92%; display: inline; }
+.errorDiv { display: none; color: red; }
+
+.param_name {
+			font-weight:bold;
+		}
+		.backtotop{
+			float:right;
+			margin-right:40px;
+		}
+		.paramsTable {padding:20px 0;}
+		pre.prettyprint {overflow:auto;}
+		.revisionsTable, .paramsTable table {border-collapse: collapse;}
+		.revisionsTable th, .paramsTable table th {background:#deedf7;}
+		.revisionsTable tr:nth-child(even) {background:rgba(0,0,0,.05);}
+/* 		 .paramsTable  tr.primary {border-top:2px solid #ccc;} */
+		.paramsTable table td .placesTree {display:inline-block;margin:0 6px 0 12px;}
+		.paramsTable table td .placesTree .space {display:inline-block;height:8px;width:8px;margin-right:6px;}
+		.paramsTable table td .placesTree .space:last-child {border-left:1px solid #999;border-bottom:1px solid #999;}
+		.revisionsTable th, .revisionsTable td, .paramsTable table th, .paramsTable table td {vertical-align:top;padding:4px 8px;border:1px solid #ccc;}
+		.revisionsTable td.cellWithTable {padding:0;}
+		.revisionsTable table.modifications {border-collapse: collapse;}
+		.revisionsTable table.modifications th {text-align:left;}
+		.revisionsTable table.modifications tr:first-child th, .revisionsTable table.modifications tr:first-child td{border-top:medium none;}
+		.revisionsTable table.modifications tr:last-child td {border-bottom:medium none;}
+		.revisionsTable table.modifications th:first-child, .revisionsTable table.modifications td:first-child {border-left:medium none;}
+		.revisionsTable table.modifications th:last-child, .revisionsTable table.modifications td:last-child {border-right:medium none;}
+		.prettyprint ol.linenums > li {list-style-type:decimal;}
+		.ui-widget-header pre.prettyprint {border:medium none;font-weight:normal;margin-top:0;}
+		#schemeXml {overflow:auto;}
+		.httpParams {border-spacing:3px;font-size:14px;}
+		.httpParams th {text-align:left;font-weight:bold;padding:4px;background:rgba(0,0,0,.1);}
+		.httpParams td {padding:4px 8px;font-weight:normal;}
+

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Project List</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+
+
+    <script src="{% static 'js/font_awesome.js'%}"></script>
+<style>
+a.link_hi {
+    cursor:pointer;
+     color:#6666ff;
+     text-decoration:underline;}
+a.link_hi:hover {
+text-decoration:none;
+     text-shadow: 1px 1px 1px #555;
+}
+
+    .not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration:none;
+  color:#dddddd !important;
+}
+
+.sidenav {
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #343a40;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+.image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+        display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sidenav a:hover {
+    color: #f8f9fa;
+}
+
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+    .tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #E8EBF1;
+    text-align: center;
+    background-color: #39393B;
+    border-radius: .25rem;
+}
+    .tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before, .tooltip.bs-tooltip-right .arrow::before {
+    margin-top: -3px;
+    content: "";
+    border-width: 5px 5px 5px 0;
+    border-right-color: #39393B;
+}
+    .tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
+    margin-left: -3px;
+    content: "";
+    border-width: 5px 5px 0;
+    border-top-color: #39393B;
+}
+    .tooltip.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .tooltip.bs-tooltip-bottom .arrow::before {
+    margin-left: -3px;
+    content: "";
+    border-width: 0 5px 5px;
+    border-bottom-color: #39393B;
+}
+    .tooltip.bs-tooltip-auto[x-placement^=left] .arrow::before, .tooltip.bs-tooltip-left .arrow::before {
+    right: 0;
+    margin-top: -3px;
+    content: "";
+    border-width: 5px 0 5px 5px;
+    border-left-color: #39393B;
+}
+
+.navbar {
+  background-color: #097dbc !important;
+}
+.navbar .navbar-brand {
+  color: #c4d6ed !important;
+}
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+  color: #f6f2f8 !important;
+}
+.navbar .navbar-text {
+  color: #c4d6ed !important;
+}
+.navbar .navbar-text a {
+  color: #f6f2f8 !important;
+}
+.navbar .navbar-text a:hover,
+.navbar .navbar-text a:focus {
+  color: #f6f2f8 !important;
+}
+.navbar .navbar-nav .nav-link {
+  color: #c4d6ed !important;
+  border-radius: .25rem !important;
+  margin: 0 0.25em !important;
+}
+.navbar .navbar-nav .nav-link:not(.disabled):hover,
+.navbar .navbar-nav .nav-link:not(.disabled):focus {
+  color: #f6f2f8 !important;
+}
+.navbar .navbar-nav .nav-item.active .nav-link,
+.navbar .navbar-nav .nav-item.active .nav-link:hover,
+.navbar .navbar-nav .nav-item.active .nav-link:focus,
+.navbar .navbar-nav .nav-item.show .nav-link,
+.navbar .navbar-nav .nav-item.show .nav-link:hover,
+.navbar .navbar-nav .nav-item.show .nav-link:focus {
+  color: #f6f2f8 !important;
+  background-color: #049fd9 !important;
+}
+.navbar .navbar-toggle {
+  border-color: #049fd9 !important;
+}
+.navbar .navbar-toggle:hover,
+.navbar .navbar-toggle:focus {
+  background-color: #049fd9 !important;
+}
+.navbar .navbar-toggle .navbar-toggler-icon {
+  color: #c4d6ed !important;
+}
+.navbar .navbar-collapse,
+.navbar .navbar-form {
+  border-color: #c4d6ed !important;
+}
+.navbar .navbar-link {
+  color: #c4d6ed !important;
+}
+.navbar .navbar-link:hover {
+  color: #f6f2f8 !important;
+}
+
+@media (max-width: 575px) {
+  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #c4d6ed !important;
+  }
+  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #f6f2f8 !important;
+  }
+  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #f6f2f8 !important;
+    background-color: #049fd9 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #c4d6ed !important;
+  }
+  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #f6f2f8 !important;
+  }
+  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #f6f2f8 !important;
+    background-color: #049fd9 !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #c4d6ed !important;
+  }
+  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #f6f2f8 !important;
+  }
+  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #f6f2f8 !important;
+    background-color: #049fd9 !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #c4d6ed !important;
+  }
+  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #f6f2f8 !important;
+  }
+  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #f6f2f8 !important;
+    background-color: #049fd9 !important;
+  }
+}
+
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item {
+  color: #c4d6ed !important;
+}
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+  color: #f6f2f8 !important;
+}
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
+  color: #f6f2f8 !important;
+  background-color: #049fd9 !important;
+}
+
+   .content {
+        width: 80%;
+        height: 80%;
+        position: relative; /*it can be fixed too*/
+        left:0; right:0;
+        top:0; bottom:0;
+        margin:auto;
+
+        /*this to solve "the content will not be cut when the window is smaller than the content": */
+        max-width:100%;
+        max-height:100%;
+        overflow:auto;
+    }
+</style>
+</head>
+<body style="overflow-x: hidden !important;">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-g bg-dark fixed-top" >
+      <div class="container">
+        <a class="navbar-brand" href="#" style="color: white !important;">PriD</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<br>
+<br>
+<br>
+
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 content" style="border-style:solid; border-color: #049fd9 !important;height:500px">
+        <br>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">Applications</label>
+            <div class="col-sm-12">
+                <select class="form-control" id="application" style="text-align-last: center !important;">
+                    <option>SAP</option>
+                    <option>Holmes</option>
+                    <option>Service Now</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Users</label>
+            <div class="col-sm-12">
+                <select class="form-control" id="user" style="text-align-last: center !important;">
+                    {% for user in users %}
+                    <option>{{ user }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Trigger</label>
+            <div class="col-sm-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="email" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        Email Trigger
+                    </label>
+                </div>
+                <div class="form-check form-check-inline abc">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="time">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Time&nbsp;Slot
+                    </label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+        <br id ="break">
+        <br>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3"><button type="button" class="btn btn-primary" style="background-color: #049fd9!important; border: none!important;" onclick="permit()">Grant Permission</button></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3"><button type="button" class="btn btn-primary" style="background-color: #049fd9!important;border: none!important;" onclick="revoke()">Revoke Permission</button></div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+</body>
+<script>
+    var appended = $('<input class="form-control" type="time" id ="startTime">&nbsp;&nbsp;&nbsp;To&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" type="time" id ="endTime">') ;
+    // assigns the 'id' of "appended" to the 'appended' element
+    appended.id = 'appended';
+
+    // 1. selects '<input type="radio" />' elements with the 'name' attribute of 'postage'
+    // 2. assigns the onChange/onchange event handler
+    $('input:radio[name="exampleRadios"]').change(
+        function(){
+
+            // checks that the clicked radio button is the one of value 'Yes'
+            // the value of the element is the one that's checked (as noted by @shef in comments)
+            if ($(this).val() == 'time') {
+
+                // appends the 'appended' element to the 'body' tag
+                $(appended).appendTo('.abc');
+            }
+            else {
+
+                // if it's the 'No' button removes the 'appended' element.
+                $(appended).remove();
+            }
+        });
+    $(document).on('change','#endTime',function(){
+                          if ($('#errorMessage').length > 0) {
+    $('#errorMessage').remove();
+    $('.abc').after('<br>');
+  }
+            var start_time = $("#startTime").val();
+            var end_time = $("#endTime").val();
+            //convert both time into timestamp
+            var stt = new Date("November 13, 2013 " + start_time);
+            stt = stt.getTime();
+            var endt = new Date("November 13, 2013 " + end_time);
+            endt = endt.getTime();
+
+            //by this you can see time stamp value in console via firebug
+//            alert("Time1: "+ stt + " Time2: " + endt);
+
+            if(stt > endt) {
+                $("#break").remove();
+                $(".abc").after('<div class="alert alert-danger" id = "errorMessage">Start-time must be before then End-time.</div>');
+            }
+       });
+function permit() {
+    var application = document.getElementById( "application" ).value;
+    var user = document.getElementById( "user" ).value;
+    var t = $("input[name=exampleRadios]:checked").val();
+    //alert (application);
+    //alert (user);
+    //alert (trigger);
+    var trigger={};
+    trigger['name'] = t;
+    if (t == 'time')
+    {
+        var start = document.getElementById( "startTime" ).value;
+
+        var end = document.getElementById( "endTime" ).value;
+        //alert(start);
+        //alert(end);
+        trigger['start'] = start;
+        trigger['end'] = end;
+    }
+    //alert(JSON.stringify(trigger));
+    $.ajax({
+        url: '/permit/',
+        type: 'get',
+        data: {
+            application:application,
+            user:user,
+            trigger:JSON.stringify(trigger)
+          },
+        success: function (response) {
+            alert(response.msg);
+            window.location = '/index/'
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+   });
+      }
+
+function revoke() {
+    var application = document.getElementById( "application" ).value;
+    var user = document.getElementById( "user" ).value;
+    var t = $("input[name=exampleRadios]:checked").val();
+    //alert (application);
+    //alert (user);
+    //alert (trigger);
+    var trigger={};
+    trigger['name'] = t;
+    if (t == 'time')
+    {
+        var start = document.getElementById( "startTime" ).value;
+
+        var end = document.getElementById( "endTime" ).value;
+        //alert(start);
+        //alert(end);
+        trigger['start'] = start;
+        trigger['end'] = end;
+    }
+    //alert(JSON.stringify(trigger));
+    $.ajax({
+        url: '/revoke/',
+        type: 'get',
+        data: {
+            application:application,
+            user:user,
+            trigger:JSON.stringify(trigger)
+          },
+        success: function (response) {
+            alert(response.msg);
+            window.location = '/index/'
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+   });
+      }
+
+</script>
+</html>

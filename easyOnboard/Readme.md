@@ -2,7 +2,7 @@
 
 [Detailed documentation on Jive](https://cisco.jiveon.com/docs/DOC-1936987)
 
-This folder contains that django application for the EasyonBoard Apllication.
+This folder contains that django application for the EasyonBoard Application.
 
 ##### Requirements
   - Python 2.7  
@@ -23,6 +23,7 @@ This folder contains that django application for the EasyonBoard Apllication.
 
 Points to be noted:
   - For using the refresh option, the page has to be first refreshed. 
+  - We have used a csv file instead of the IPAM however, the APIs for IPAM integration are available. 
   - The logic of polling the response to find has not been implemented and instead a ```time.sleep()``` has been used. This may result in an error. To fix this error, check the steps that have been completed till now. If the authorization rules haven't been created yet, then the error must have been that we were trying to get the information before the DNAC finished pushing it. (More specifically, the DNAC did not finish associating the IP with the VN which has caused this problem)
 
     1. Go to the DNAC and unlink the IP from the VN if it is linked
