@@ -4,8 +4,6 @@ from datetime import datetime
 
 def some_job():
 	d=dict()
-	#print objh
-	##for host in objh['response']:
 	fil = open("hosts.json","rb") 
 	strdata = fil.read()
 	expdata = json.loads(strdata)
@@ -40,14 +38,8 @@ def some_job():
 	    for port in ports:
 	        tn.write("show int "+str(port)+" | include minute input rate\n")
 	        t=tn.read_until(ENABLE_PROMPT, 5)
-	        #print t
-	        #grade.append(t)
-	        #print "The output given is "+t
 	        ten=t.split(" ")
-	        #print ten
 	        index_element = ten.index('bits/sec,') 
-	        #print "the input rate in 5 min interval is " + ten[index_element-1]
-	        #print "the packets delivered in 5 min interval is " + ten[index_element+1]
 	        input_rate = int(ten[index_element-1])
 	        packets = int(ten[index_element+1])        
 	        data=[nwdevice,port,input_rate,packets,time_mod]

@@ -4,10 +4,13 @@ import pandas as pd
 import numpy as np
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)#GET request with error handling 
-b64Val = base64.b64encode('admin:Cisco123'.encode('UTF-8')).decode('utf-8')
+#Enter your DNAC credentials here
+username = 'username'
+password = 'password'
+ip = 'ipaddress'
+b64Val = base64.b64encode((username+':'+password).encode('UTF-8')).decode('utf-8')
 try:
-#    r=requests.get('https://10.126.109.172/api/system/v1/auth/login', headers={"Authorization": "Basic %s" % b64Val,"Content-Type": "application/json"}, verify=False)
-    r=requests.get('https://172.28.97.216/api/system/v1/auth/login', headers={"Authorization": "Basic %s" % b64Val,"Content-Type": "application/json"}, verify=False)
+    r=requests.get('https://'+ip+'/api/system/v1/auth/login', headers={"Authorization": "Basic %s" % b64Val,"Content-Type": "application/json"}, verify=False)
     r.raise_for_status()
 except requests.exceptions.Timeout as errt:
     print "Timeout Error:",errt
@@ -27,7 +30,7 @@ b=a[0].split("=")
 c=b[1]
 cookie = {'X-JWT-ACCESS-TOKEN':c}
 
-tg='https://172.28.97.216/api/v1/host'
+tg='https://'+ip+'/api/v1/host'
             
 try:
     r= requests.get(tg,cookies=cookie,verify=False)
