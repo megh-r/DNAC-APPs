@@ -13,3 +13,8 @@ Refer the [Jive page](https://cisco.jiveon.com/docs/DOC-1963052) that has a deta
 1. The ```get_hosts.py``` file contains the code to get the list of all hosts in the network.
 2. The ```dashboard_code.py``` file contains the dashboard code to run and refresh the results.
 3. The ```extract_user_info.py``` file contains the code that you run periodically to poll for the data.
+
+### Screenshot:
+![alt text][logo]
+
+[logo]:https://github.com/lmukund/DNAC-APPs/tree/master/userUsageDashboard/img/dashboard.JPG "User Usage Dashboard"
