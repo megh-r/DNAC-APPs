@@ -1,0 +1,1516 @@
+
+<!-- saved from url=(0037)https://10.126.109.121:9060/ers/sdk#_ -->
+<html xmlns="http://www.w3.org/1999/xhtml" class="gr__10_126_109_121" style="overflow: hidden; height: 100%; border: none; padding: 0px; margin: 0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<meta name="language" content="en">
+
+<title>External Restful Service (ERS)</title>
+<link rel="stylesheet" type="text/css" href="./External Restful Service (ERS)_files/main.css">
+<link rel="stylesheet" type="text/css" href="./External Restful Service (ERS)_files/layout-default-latest.css">
+<link rel="stylesheet" type="text/css" href="./External Restful Service (ERS)_files/jquery-ui.css">
+
+<!--	<link rel="stylesheet" type="text/css" href="jquery/themes/base/jquery.ui.all.css" />-->
+<!-- CUSTOMIZE/OVERRIDE THE DEFAULT CSS -->
+
+<style type="text/css">
+
+/* remove padding and scrolling from elements that contain an Accordion OR a content-div */
+.ui-layout-center, /* has content-div */ .ui-layout-west,
+	/* has Accordion */ .ui-layout-east, /* has content-div ... */
+	.ui-layout-east .ui-layout-content { /* content-div has Accordion */
+	padding: 0;
+	overflow: hidden;
+}
+
+img {
+	width: 800px;
+	max-width: 100%;
+}
+
+.ui-layout-center P.ui-layout-content {
+	line-height: 1.4em;
+	margin: 0; /* remove top/bottom margins from <P> used as content-div */
+}
+
+h3, h4 { /* Headers & Footer in Center & East panes */
+	font-size: 1.1em;
+	background: #EEF;
+	border: 1px solid #BBB;
+	border-width: 0 0 1px;
+	padding: 7px 10px;
+	margin: 0;
+}
+
+.ui-layout-east h4 { /* Footer in East-pane */
+	font-size: 0.9em;
+	font-weight: normal;
+	border-width: 1px 0 0;
+}
+</style>
+
+<!-- REQUIRED scripts for layout widget -->
+<script type="text/javascript" src="./External Restful Service (ERS)_files/jquery-1.9.1.js.download"></script>
+<script type="text/javascript" src="./External Restful Service (ERS)_files/jquery-ui.js.download"></script>
+<script type="text/javascript" src="./External Restful Service (ERS)_files/jquery.layout-latest.js.download"></script>
+<script type="text/javascript" src="./External Restful Service (ERS)_files/jquery.layout.resizePaneAccordions-latest.js.download"></script>
+
+<!-- compressed: /lib/js/jquery.layout.resizePaneAccordions-latest.min.js -->
+
+<script type="text/javascript" src="./External Restful Service (ERS)_files/jquery.jstree.js.download"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		myLayout = $('body').layout({
+			west__size : 300,
+			east__size : 300
+			// RESIZE Accordion widget when panes resize
+			,
+			west__onresize : $.layout.callbacks.resizePaneAccordions,
+			east__onresize : $.layout.callbacks.resizePaneAccordions
+		});
+
+		// ACCORDION - in the West pane
+		$("#accordion1").accordion({
+			heightStyle : "fill"
+		});
+
+	});
+</script>
+
+<style type="text/css" id="vakata-stylesheet">#vakata-dragged { display:block; margin:0 0 0 0; padding:4px 4px 4px 24px; position:absolute; top:-2000px; line-height:16px; z-index:10000; } #vakata-contextmenu { display:block; visibility:hidden; left:0; top:-200px; position:absolute; margin:0; padding:0; min-width:180px; background:#ebebeb; border:1px solid silver; z-index:10000; *width:180px; } #vakata-contextmenu ul { min-width:180px; *width:180px; } #vakata-contextmenu ul, #vakata-contextmenu li { margin:0; padding:0; list-style-type:none; display:block; } #vakata-contextmenu li { line-height:20px; min-height:20px; position:relative; padding:0px; } #vakata-contextmenu li a { padding:1px 6px; line-height:17px; display:block; text-decoration:none; margin:1px 1px 0 1px; } #vakata-contextmenu li ins { float:left; width:16px; height:16px; text-decoration:none; margin-right:2px; } #vakata-contextmenu li a:hover, #vakata-contextmenu li.vakata-hover > a { background:gray; color:white; } #vakata-contextmenu li ul { display:none; position:absolute; top:-2px; left:100%; background:#ebebeb; border:1px solid gray; } #vakata-contextmenu .right { right:100%; left:auto; } #vakata-contextmenu .bottom { bottom:-1px; top:auto; } #vakata-contextmenu li.vakata-separator { min-height:0; height:1px; line-height:1px; font-size:1px; overflow:hidden; margin:0 2px; background:silver; /* border-top:1px solid #fefefe; */ padding:0; } </style><style type="text/css" id="jstree-stylesheet">.jstree ul, .jstree li { display:block; margin:0 0 0 0; padding:0 0 0 0; list-style-type:none; } .jstree li { display:block; min-height:18px; line-height:18px; white-space:nowrap; margin-left:18px; min-width:18px; } .jstree-rtl li { margin-left:0; margin-right:18px; } .jstree > ul > li { margin-left:0px; } .jstree-rtl > ul > li { margin-right:0px; } .jstree ins { display:inline-block; text-decoration:none; width:18px; height:18px; margin:0 0 0 0; padding:0; } .jstree a { display:inline-block; line-height:16px; height:16px; color:black; white-space:nowrap; text-decoration:none; padding:1px 2px; margin:0; } .jstree a:focus { outline: none; } .jstree a > ins { height:16px; width:16px; } .jstree a > .jstree-icon { margin-right:3px; } .jstree-rtl a > .jstree-icon { margin-left:3px; margin-right:0; } li.jstree-open > ul { display:block; } li.jstree-closed > ul { display:none; } #vakata-dragged ins { display:block; text-decoration:none; width:16px; height:16px; margin:0 0 0 0; padding:0; position:absolute; top:4px; left:4px;  -moz-border-radius:4px; border-radius:4px; -webkit-border-radius:4px; } #vakata-dragged .jstree-ok { background:green; } #vakata-dragged .jstree-invalid { background:red; } #jstree-marker { padding:0; margin:0; font-size:12px; overflow:hidden; height:12px; width:8px; position:absolute; top:-30px; z-index:10001; background-repeat:no-repeat; display:none; background-color:transparent; text-shadow:1px 1px 1px white; color:black; line-height:10px; } #jstree-marker-line { padding:0; margin:0; line-height:0%; font-size:1px; overflow:hidden; height:1px; width:100px; position:absolute; top:-30px; z-index:10000; background-repeat:no-repeat; display:none; background-color:#456c43;  cursor:pointer; border:1px solid #eeeeee; border-left:0; -moz-box-shadow: 0px 0px 2px #666; -webkit-box-shadow: 0px 0px 2px #666; box-shadow: 0px 0px 2px #666;  -moz-border-radius:1px; border-radius:1px; -webkit-border-radius:1px; }.jstree .jstree-real-checkbox { display:none; } .jstree-themeroller .ui-icon { overflow:visible; } .jstree-themeroller a { padding:0 2px; } .jstree-themeroller .jstree-no-icon { display:none; }.jstree .jstree-wholerow-real { position:relative; z-index:1; } .jstree .jstree-wholerow-real li { cursor:pointer; } .jstree .jstree-wholerow-real a { border-left-color:transparent !important; border-right-color:transparent !important; } .jstree .jstree-wholerow { position:relative; z-index:0; height:0; } .jstree .jstree-wholerow ul, .jstree .jstree-wholerow li { width:100%; } .jstree .jstree-wholerow, .jstree .jstree-wholerow ul, .jstree .jstree-wholerow li, .jstree .jstree-wholerow a { margin:0 !important; padding:0 !important; } .jstree .jstree-wholerow, .jstree .jstree-wholerow ul, .jstree .jstree-wholerow li { background:transparent !important; }.jstree .jstree-wholerow ins, .jstree .jstree-wholerow span, .jstree .jstree-wholerow input { display:none !important; }.jstree .jstree-wholerow a, .jstree .jstree-wholerow a:hover { text-indent:-9999px; !important; width:100%; padding:0 !important; border-right-width:0px !important; border-left-width:0px !important; } .jstree .jstree-wholerow-span { position:absolute; left:0; margin:0px; padding:0; height:18px; border-width:0; padding:0; z-index:0; }</style><link rel="stylesheet" type="text/css" media="all" href="./External Restful Service (ERS)_files/style.css"></head>
+<body data-gr-c-s-loaded="true" class="ui-layout-container" style="overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;">
+
+	<div class="ui-layout-north ui-widget-content ui-layout-pane ui-layout-pane-north" style="display: block; position: absolute; margin: 0px; top: 0px; bottom: auto; left: 0px; right: 0px; width: auto; z-index: 0; height: 35px; visibility: visible;">
+		<div style="float: right; margin-right: 160px;">
+			<!--		<button onClick="resizeWidgets()">Resize</button> &nbsp;
+		<button onClick="removeUITheme(); myLayout.resizeAll()">Remove Theme</button>-->
+		</div>
+		<h3>External RESTful Services (ERS) Online SDK</h3>
+
+	</div>
+
+	<!--<div class="ui-layout-south ui-widget-content ui-state-error" style="display: none;"> South Pane </div>-->
+
+	<div class="ui-layout-center ui-layout-pane ui-layout-pane-center" style="display: block; position: absolute; margin: 0px; left: 306px; right: 0px; top: 63px; bottom: 0px; height: 476px; width: 972px; z-index: 0; visibility: visible;">
+		<h3 class="ui-widget-header">Security Groups</h3>
+		<div class="ui-layout-content ui-widget-content" style="position: relative; height: 417px; visibility: visible;"><!--**************************************************-->
+<!-- Copyright (c) 2012-2015 Cisco Systems, Inc.-->
+<!-- All rights reserved.-->
+<!--**************************************************-->
+
+
+
+
+<link rel="stylesheet" type="text/css" href="./External Restful Service (ERS)_files/main.css">
+<link rel="stylesheet" type="text/css" href="./External Restful Service (ERS)_files/prettify.css">
+<script>
+
+		$.getScript("js/prettify.js");
+		var schemeXml = null;
+		var loadXMLIntoContainer = function(container, data){
+			data = data.replace(/^\s+|\s+$/g, '');
+			$(container).text(data);
+			if(typeof prettyPrint !== "undefined"){
+				$('pre').each(function(){$(this).removeClass("prettyprinted").text($(this)[0].innerText);});
+				setTimeout(function(){
+					prettyPrint();
+					$('.httpParams td:contains("GET")').css("color","#2e6da4");
+					$('.httpParams td:contains("POST")').css("color","#4cae4c");
+					$('.httpParams td:contains("PUT")').css("color","#eea236");
+					$('.httpParams td:contains("DELETE")').css("color","#d43f3a");
+				}, 500);
+			}
+		};
+		var getSchemeXml = function(){
+   		
+   		$.post("ers-sdk-xml.jsp", { resourceRadio: "trustsec.sgt"})
+			.done(function(data) {
+						loadXMLIntoContainer("#schemeXml", data);
+						schemeXml = data;
+						debug(data);
+						
+						
+						function goToByScroll(id){
+						        $('html,body').animate({scrollTop: $($("a")[0]).offset().top},'slow');
+						}
+						var hash = window.location.hash;
+
+						setTimeout(function(){
+						      goToByScroll(hash);
+						},2000);
+						
+			});
+			
+			
+	  };
+	  //$.get("data-model/trustsec.sgt.json").done(function(data){
+		$.get("data-model.json").done(function(data){
+		  if(!data['trustsec.sgt']){
+			  return;
+		  }
+		  var tableStr = "<table>";
+		  tableStr += "<thead><tr><th>Attribute</th><th>Type</th><th>Required</th><th>Default value</th><th>Description</th></tr></thead><tbody>";
+		  tableStr += "<tr style='background:rgba(0,0,0,.06)'><td>name</td><td>String</td><td>Yes</td><td></td><td>Resource name</td></tr>";
+		  tableStr += "<tr style='background:rgba(0,0,0,.06)'><td>id</td><td>String</td><td>Yes</td><td></td><td>Resourse UUID</td></tr>";
+		  tableStr += "<tr style='background:rgba(0,0,0,.06)'><td>description</td><td>String</td><td>No</td><td></td><td></td></tr>";
+		  function generateCell(value){
+			  var str = "<td>";
+			  str += value ? value : "";
+			  str += "</td>";
+			  return str;
+		  }
+		  function generateTree(place){
+			  if(place == 0) return "";
+			  var html = "<span class='placesTree'>";
+				for(var i=0;i<place;i++){
+					  html += "<span class='space'></span>";
+				}
+				html += "</span>";
+				return html;
+		  };
+		function generateRow(obj, place, parentKey){ 
+			var tableStr = "";
+		  $.each(obj, function(key, value){
+			  parentKey = place == 0 ? key : parentKey;
+			  tableStr += "<tr style='";
+// 			  tableStr += place == 0 ? "primary " : "";
+// 			  tableStr += (parentKey+4)%2 == 1 ? "even" : "";
+			tableStr += "background:rgba(0,0,0,.0"+Math.max((6-(place*3)), 0)+")";
+				//tableStr += place == 0 ? "":"style='border-left:"+place*15+"px solid #ccc'";
+				tableStr += "'>";
+			  tableStr += generateCell(generateTree(place).toString() + value.field);
+			  tableStr += generateCell(value.type);
+			  tableStr += generateCell(value.required);
+			  tableStr += generateCell(value.defaultValue);
+			  tableStr += generateCell(value.description);
+			  tableStr += "</tr>";
+			if(value.childNodes) {				
+				tableStr += generateRow(value.childNodes, place+1, parentKey);
+			}
+		  });
+			return tableStr;
+		}
+		tableStr += generateRow(data['trustsec.sgt'], 0);
+		  tableStr += "</tbody></table>";
+		  $("#params").append(tableStr);
+	  });
+	  var getAdditionalData = function(title, container, attrCsv){
+		  $.post("ers-sdk-xml.jsp",{resourceRadio:"ers.operationadditionaldata" , attrRadio:attrCsv}).done(function(data) {
+				if(data!=null&&$.trim(data)!="null"){
+					loadXMLIntoContainer(container, data);
+					$(title).text("Request Content:");
+				}
+		});  
+		  
+	  }
+	  
+	  var fetchXmlContent = function(title, container, attrCsv, namespace, isbulk){
+		  $.post("ers-sdk-xml.jsp",{resourceRadio:namespace , attrRadio:attrCsv , bulkRadio:isbulk}).done(function(data) {
+				if(data!=null&&$.trim(data)!="null"){
+					loadXMLIntoContainer(container, data);
+					$(title).text("Request Content:");
+				}
+		});  
+		  
+	  }
+	  
+	  
+	  
+	  var appendResultXml = function(key, container, attrCsv){
+   		if(key =="N/A"){
+   			$(container).text("N/A");
+   			return;
+   		} else if (key == "ers.zipresult") {
+   			$(container).text("[Response is returned as an Octet Stream representing a ZIP file.]");
+   			return;
+   		}
+   		$.post("ers-sdk-xml.jsp", { resourceRadio: key, attrRadio:attrCsv})
+			.done(function(data) {
+					if(data!=null&&$.trim(data)!="null"){
+						loadXMLIntoContainer(container, data);
+					}else{
+						$(container).text("N/A");
+					}
+					debug(container + ":" + data);
+			});
+	  };
+	  
+	  
+	  
+    var getHttpHeaderData = function(key, uri, version, requestType, requestAction){
+
+    		var csrfVal = "The Token value from the GET X-CSRF-TOKEN fetch request";
+    	
+    		if ("GET" == requestType ){
+    			csrfVal = "fetch";
+          	}
+          	
+    		
+    	
+			var retVal  = ["HTTP 'Content-Type' Header:" , "application/xml  |  application/json",
+			               "HTTP 'Accept' Header:" , "application/xml  |  application/json", 
+			               "HTTP 'ERS-Media-Type' Header (Not Mandatory):" , getERSMediaTypeHeader(key, uri, version),
+			               "HTTP 'X-CSRF-TOKEN' Header (Required Only if Enabled from GUI):" , csrfVal];
+    		
+			
+			return retVal;
+     };	  
+	  
+	  
+	  
+	  var getERSMediaTypeHeader = function(key, uri, version){
+	          var header = key + "." + version;
+	          return header;
+	  };
+	  
+	  
+	  
+	  var getContentData = function(key, uri, version, requestType, title, theContent){
+		  //console.log(arguments)
+	       if(!schemeXml)  {
+	       	setTimeout(function(){getContentData(key, uri, version, requestType, title, theContent)},1000);
+	       	return;
+	       }
+						var content = [];
+						content[0] = "Request Content:";
+	         
+	          if ("POST" == requestType || "PUT" == requestType){
+	            
+	            	content[1] = schemeXml;
+	               
+	          }
+	          else{
+	          	content[1] = "N/A";
+		           
+	          }
+            $(title).text(content[0]);
+            loadXMLIntoContainer(theContent, content[1]);
+            //$(theContent).text(content[1]);
+	  };
+	  
+	setTimeout(function(){getSchemeXml()},1000);
+		</script>
+
+
+
+
+	<!-- <span id="resource_object_body" style="overflow:scroll"> -->
+	<a name="_"></a>
+	<br>
+	<ul id="anchors">
+		<li><a href="https://10.126.109.121:9060/ers/sdk#overviewAnchor">Overview</a></li>
+		<li><a href="https://10.126.109.121:9060/ers/sdk#scheme">Resource definition</a></li>
+		<li><a href="https://10.126.109.121:9060/ers/sdk#revhist">Revision History</a></li>
+	<li><a href="https://10.126.109.121:9060/ers/sdk#Get-By-Id">Get-By-Id</a><a></a></li><li><a href="https://10.126.109.121:9060/ers/sdk#Update">Update</a><a></a></li><li><a href="https://10.126.109.121:9060/ers/sdk#Delete">Delete</a><a></a></li><li><a href="https://10.126.109.121:9060/ers/sdk#Create">Create</a><a></a></li><li><a href="https://10.126.109.121:9060/ers/sdk#Get-All">Get-All</a><a></a></li><li><a href="https://10.126.109.121:9060/ers/sdk#version">Get Version</a><a></a></li><li><a href="https://10.126.109.121:9060/ers/sdk#bulk">Bulk Request</a><a></a></li><li><a href="https://10.126.109.121:9060/ers/sdk#bulk">Monitor Bulk Status</a><a></a></li></ul>
+	<a name="overviewAnchor"></a>
+	<br>
+	<br>
+	<h3 class="ui-widget-header">Overview</h3>
+	<br>
+	<br>
+	<div id="overview">
+		
+		Sgt API allows the client to search SGTs. In this documentation, for each available API you will find the request syntax including the required headers and a response example of a successful flow.
+		
+
+	</div>
+	<br>
+	<br>
+	<div style="color: red; font-style: italic; font-weight: bold; font-family: Arial">
+		Please note that these examples are not meant to be used as is because
+		they have references to DB data.<br> You should treat it as a basic
+		template and edit it before sending to server.
+	</div>
+	<br>
+	<br>
+	<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a>
+	<a name="scheme"></a>
+	<br>
+	<h3 class="ui-widget-header">Resource definition</h3>
+	<span>
+		<div style="overflow-y: auto">
+			<div id="params" class="paramsTable"><table><thead><tr><th>Attribute</th><th>Type</th><th>Required</th><th>Default value</th><th>Description</th></tr></thead><tbody><tr style="background:rgba(0,0,0,.06)"><td>name</td><td>String</td><td>Yes</td><td></td><td>Resource name</td></tr><tr style="background:rgba(0,0,0,.06)"><td>id</td><td>String</td><td>Yes</td><td></td><td>Resourse UUID</td></tr><tr style="background:rgba(0,0,0,.06)"><td>description</td><td>String</td><td>No</td><td></td><td></td></tr><tr style="background:rgba(0,0,0,.06)"><td>value</td><td>int</td><td>Yes</td><td></td><td>Value range: 2 ot 65519 or -1 to auto-generate</td></tr><tr style="background:rgba(0,0,0,.06)"><td>propogateToApic</td><td>Boolean</td><td>No</td><td></td><td></td></tr></tbody></table></div>
+			<br>
+			<span>XML example:</span>
+			<br>
+			<pre id="schemeXml" class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pln">XML</span></li><li class="L1"><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">?&gt;</span></li><li class="L2"><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">sgt xmlns</span><span class="pun">:</span><span class="pln">ns0</span><span class="pun">=</span><span class="str">"trustsec.ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xs</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns1</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ers</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> description</span><span class="pun">=</span><span class="str">"description"</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"id"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"name"</span><span class="pun">&gt;</span></li><li class="L3"><span class="pln">   </span><span class="str">&lt;propogateToApic&gt;</span><span class="kwd">false</span><span class="pun">&lt;/</span><span class="pln">propogateToApic</span><span class="pun">&gt;</span></li><li class="L4"><span class="pln">   </span><span class="str">&lt;value&gt;</span><span class="lit">2</span><span class="pun">&lt;/</span><span class="pln">value</span><span class="pun">&gt;</span></li><li class="L5"><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">sgt</span><span class="pun">&gt;</span></li><li class="L6"><span class="pln">&nbsp;</span></li><li class="L7"><span class="pln">JSON</span></li><li class="L8"><span class="pun">{</span></li><li class="L9"><span class="pln">  </span><span class="str">"Sgt"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span></li><li class="L0"><span class="pln">    </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"id"</span><span class="pun">,</span></li><li class="L1"><span class="pln">    </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"name"</span><span class="pun">,</span></li><li class="L2"><span class="pln">    </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description"</span><span class="pun">,</span></li><li class="L3"><span class="pln">    </span><span class="str">"value"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span></li><li class="L4"><span class="pln">    </span><span class="str">"propogateToApic"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span></li><li class="L5"><span class="pln">  </span><span class="pun">}</span></li><li class="L6"><span class="pun">}</span></li></ol></pre>
+		</div> <a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a><br>
+	<br>
+	</span>
+
+	<a name="revhist"></a>
+	<br>
+	<h3 class="ui-widget-header">Revision History</h3>
+	<br>
+	<br>
+	<span>
+		<div style="overflow-y: auto">
+			<div style="">
+				<table class="revisionsTable">
+					<thead>
+						<tr>
+							<th colspan="2">Revision 0</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Resource Version</td>
+							<td>1.0</td>
+						</tr>
+						<tr>
+							<td>ISE Version</td>
+							<td>1.2
+							</td>
+						</tr>
+						<tr>
+							<td>Description</td>
+							<td>Initial Ise Version</td>
+						</tr>
+					</tbody>
+					
+					<thead>
+						<tr>
+							<th colspan="2">Revision 1
+							</th>
+						</tr>
+					</thead><thead>
+					</thead><tbody>
+						<tr>
+							<td>Resource Version</td>
+							<td>1.1</td>
+						</tr>
+						<tr>
+							<td>ISE Version</td>
+							<td>1.4</td>
+						</tr>
+						<tr>
+							<td>Description</td>
+							<td>ISE 1.4 model changes</td>
+						</tr>
+						<tr>
+							<td>Revision Modification</td>
+							<td class="cellWithTable">
+								<table class="modifications">
+									<thead>
+										<tr>
+											<th>Attribute</th>
+											<th>Description</th>
+										</tr>
+									</thead><thead>
+									</thead><tbody>
+										
+										<tr>
+											<td>isTagFromRange</td>
+											<td>Removed Attribute isTagFromRange - depricated - set to  FALSE value by default.</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						
+					</tbody><thead>
+						<tr>
+							<th colspan="2">Revision 2
+							</th>
+						</tr>
+					</thead><thead>
+					</thead><tbody>
+						<tr>
+							<td>Resource Version</td>
+							<td>1.2</td>
+						</tr>
+						<tr>
+							<td>ISE Version</td>
+							<td>2.3</td>
+						</tr>
+						<tr>
+							<td>Description</td>
+							<td>ISE 2.3 model changes</td>
+						</tr>
+						<tr>
+							<td>Revision Modification</td>
+							<td class="cellWithTable">
+								<table class="modifications">
+									<thead>
+										<tr>
+											<th>Attribute</th>
+											<th>Description</th>
+										</tr>
+									</thead><thead>
+									</thead><tbody>
+										
+										<tr>
+											<td>propogateToApic</td>
+											<td>Added Boolean Attribute propogateToApic - By default value is false</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						
+					</tbody>
+				</table>
+
+
+
+			</div>
+			<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a><br>
+			<br>
+	
+
+
+	<h3 class="ui-widget-header">Api Reference</h3>
+
+
+	<form id="exampleForm" name="exampleForm">
+
+		
+		<a name="Get-By-Id">
+			</a><h3 class="ui-widget-header ui-state-active" style="margin: 20px"><a name="Get-By-Id">Get-By-Id
+		</a>
+		</h3>
+		<script>
+                                                				$('#anchors').append($('<li><a href="#Get-By-Id">Get-By-Id<a></li>'));
+                                                			</script>
+
+		<div style="margin-left: 20px;">
+			<span class="param_name">Request:</span><br>
+			<br>
+
+			<div class="ui-widget-header dashed_box" style="overflow-y: auto">
+
+				
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th>Method:</th>
+						<td style="color: rgb(46, 109, 164);">GET</td>
+					</tr>
+
+					
+					<tr>
+						<th>URI:</th>
+						<td>https://10.126.109.121:9060/ers/config/sgt/{id}</td>
+					</tr>
+					<tr id="acceptHeader_Get-By-Id"><th class="param_name">HTTP 'Content-Type' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'Accept' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'ERS-Media-Type' Header (Not Mandatory):</th><td>trustsec.sgt.1.2</td></tr><tr><th class="param_name">HTTP 'X-CSRF-TOKEN' Header (Required Only if Enabled from GUI):</th><td>fetch</td></tr>
+					
+					
+					
+				</tbody></table>
+				<script>
+           				var headerData = getHttpHeaderData("trustsec.sgt", "https://10.126.109.121:9060/ers/config/sgt/{id}",
+           						"1.2","GET","Get-By-Id");
+           				
+           				var entry1 = "<th class='param_name'>" + headerData[0] + "</th><td>" + headerData[1] + "</td>";
+           				
+						var entry2 = "<tr><th class='param_name'>" + headerData[2] + "</th><td>" + headerData[3] + "</td></tr>";
+						
+						var entry3 = "<tr><th class='param_name'>" + headerData[4] + "</th><td>" + headerData[5] + "</td></tr>";
+           				
+						var entry4 = "<tr><th class='param_name'>" + headerData[6] + "</th><td>" + headerData[7] + "</td></tr>";
+			
+           				
+           				$("#acceptHeader_Get-By-Id").html(entry1);
+           				$("#acceptHeader_Get-By-Id").after(entry4);
+           				$("#acceptHeader_Get-By-Id").after(entry3);
+           				$("#acceptHeader_Get-By-Id").after(entry2);
+           				
+           				
+			    </script>
+				<br> <span class="param_name" id="content_title_Get-By-Id">Request Content:</span>
+				<pre class="prettyprint prettyprinted" id="content_Get-By-Id" style=""><span class="pln">N</span><span class="pun">/</span><span class="pln">A</span></pre>
+				
+				<script>
+			                                                							getContentData("sgt", "https://10.126.109.121:9060/ers/config/sgt/{id}", "1.2","GET", "#content_title_Get-By-Id","#content_Get-By-Id");
+			                                                						</script>
+				
+
+
+			</div>
+			<br> <span class="param_name">Response:</span> (Sgt)<br><br>
+			<div class="ui-widget-header" style="margin-right: 20px; margin-left: 40px; border: 1px dashed; padding: 10px; overflow-y: auto">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr><th class="param_name">HTTP Status:</th>
+					<td>200 (OK)</td>
+				</tr></tbody></table>
+				<br> <span class="param_name">Content:</span> <br>
+				<pre class="prettyprint prettyprinted" id="response_content_Get-By-Id" style=""><span class="pln">XML
+</span><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">sgt xmlns</span><span class="pun">:</span><span class="pln">ns0</span><span class="pun">=</span><span class="str">"trustsec.ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xs</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns1</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ers</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> description</span><span class="pun">=</span><span class="str">"description"</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"id"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"name"</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="str">&lt;propogateToApic&gt;</span><span class="kwd">false</span><span class="pun">&lt;/</span><span class="pln">propogateToApic</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="str">&lt;value&gt;</span><span class="lit">2</span><span class="pun">&lt;/</span><span class="pln">value</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">sgt</span><span class="pun">&gt;</span><span class="pln">
+
+JSON
+</span><span class="pun">{</span><span class="pln">
+  </span><span class="str">"Sgt"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"id"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"name"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"value"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"propogateToApic"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+				<script>
+					appendResultXml(
+							"trustsec.sgt"
+							,"#response_content_Get-By-Id", "");
+				</script>
+			</div>
+		</div>
+
+		<!--for List, describe the paging and filter supported fields -->
+		
+
+
+		<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a>
+
+		
+		<a name="Update">
+			</a><h3 class="ui-widget-header ui-state-active" style="margin: 20px"><a name="Update">Update
+		</a>
+		</h3>
+		<script>
+                                                				$('#anchors').append($('<li><a href="#Update">Update<a></li>'));
+                                                			</script>
+
+		<div style="margin-left: 20px;">
+			<span class="param_name">Request:</span><br>
+			<br>
+
+			<div class="ui-widget-header dashed_box" style="overflow-y: auto">
+
+				
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th>Method:</th>
+						<td style="color: rgb(238, 162, 54);">PUT</td>
+					</tr>
+
+					
+					<tr>
+						<th>URI:</th>
+						<td>https://10.126.109.121:9060/ers/config/sgt/{id}</td>
+					</tr>
+					<tr id="acceptHeader_Update"><th class="param_name">HTTP 'Content-Type' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'Accept' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'ERS-Media-Type' Header (Not Mandatory):</th><td>trustsec.sgt.1.2</td></tr><tr><th class="param_name">HTTP 'X-CSRF-TOKEN' Header (Required Only if Enabled from GUI):</th><td style="color: rgb(46, 109, 164);">The Token value from the GET X-CSRF-TOKEN fetch request</td></tr>
+					
+					<tr>
+						<th class="param_name">Bulk Support:</th>
+						<td>Operation 'Update' can be used within Bulk Request.</td>
+					</tr>
+					
+					
+					
+					<tr>
+						<th class="param_name">Additional Information:</th>
+						<td>Generation Id is a read Only attribute hence any values that would be sent in the request would be ignored.</td>
+					</tr>
+					
+				</tbody></table>
+				<script>
+           				var headerData = getHttpHeaderData("trustsec.sgt", "https://10.126.109.121:9060/ers/config/sgt/{id}",
+           						"1.2","PUT","Update");
+           				
+           				var entry1 = "<th class='param_name'>" + headerData[0] + "</th><td>" + headerData[1] + "</td>";
+           				
+						var entry2 = "<tr><th class='param_name'>" + headerData[2] + "</th><td>" + headerData[3] + "</td></tr>";
+						
+						var entry3 = "<tr><th class='param_name'>" + headerData[4] + "</th><td>" + headerData[5] + "</td></tr>";
+           				
+						var entry4 = "<tr><th class='param_name'>" + headerData[6] + "</th><td>" + headerData[7] + "</td></tr>";
+			
+           				
+           				$("#acceptHeader_Update").html(entry1);
+           				$("#acceptHeader_Update").after(entry4);
+           				$("#acceptHeader_Update").after(entry3);
+           				$("#acceptHeader_Update").after(entry2);
+           				
+           				
+			    </script>
+				<br> <span class="param_name" id="content_title_Update">Request Content:</span>
+				<pre class="prettyprint prettyprinted" id="content_Update" style=""><span class="pln">XML
+</span><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">sgt xmlns</span><span class="pun">:</span><span class="pln">ns0</span><span class="pun">=</span><span class="str">"trustsec.ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xs</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns1</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ers</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> description</span><span class="pun">=</span><span class="str">"description"</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"id"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"name"</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="str">&lt;propogateToApic&gt;</span><span class="kwd">false</span><span class="pun">&lt;/</span><span class="pln">propogateToApic</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="str">&lt;value&gt;</span><span class="lit">2</span><span class="pun">&lt;/</span><span class="pln">value</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">sgt</span><span class="pun">&gt;</span><span class="pln">
+
+JSON
+</span><span class="pun">{</span><span class="pln">
+  </span><span class="str">"Sgt"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"id"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"name"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"value"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"propogateToApic"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+				
+				<script>
+			                                                							getContentData("sgt", "https://10.126.109.121:9060/ers/config/sgt/{id}", "1.2","PUT", "#content_title_Update","#content_Update");
+			                                                						</script>
+				
+
+
+			</div>
+			<br> <span class="param_name">Response:</span> (UpdatedFieldsList)<br><br>
+			<div class="ui-widget-header" style="margin-right: 20px; margin-left: 40px; border: 1px dashed; padding: 10px; overflow-y: auto">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr><th class="param_name">HTTP Status:</th>
+					<td>200 (OK)</td>
+				</tr></tbody></table>
+				<br> <span class="param_name">Content:</span> <br>
+				<pre class="prettyprint prettyprinted" id="response_content_Update" style=""><span class="pln">XML
+</span><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">updatedFields xmlns</span><span class="pun">:</span><span class="pln">ns0</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xs</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;</span><span class="pln">updatedField field</span><span class="pun">=</span><span class="str">"field1"</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="str">&lt;newValue&gt;</span><span class="pln">val_new</span><span class="pun">&lt;/</span><span class="pln">newValue</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="str">&lt;oldValue&gt;</span><span class="pln">val_old</span><span class="pun">&lt;/</span><span class="pln">oldValue</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;/</span><span class="pln">updatedField</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;</span><span class="pln">updatedField field</span><span class="pun">=</span><span class="str">"some other field"</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="str">&lt;newValue&gt;</span><span class="pln">val_new</span><span class="pun">&lt;/</span><span class="pln">newValue</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="str">&lt;oldValue&gt;</span><span class="pln">val_old</span><span class="pun">&lt;/</span><span class="pln">oldValue</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;/</span><span class="pln">updatedField</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">updatedFields</span><span class="pun">&gt;</span><span class="pln">
+
+JSON
+</span><span class="pun">{</span><span class="pln">
+  </span><span class="str">"UpdatedFieldsList"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"updatedField"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"field"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"field1"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"oldValue"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"val_old"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"newValue"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"val_new"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"field"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"some other field"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"oldValue"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"val_old"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"newValue"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"val_new"</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln"> </span><span class="pun">]</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+				<script>
+					appendResultXml(
+							"ers.updatedfields"
+							,"#response_content_Update", "");
+				</script>
+			</div>
+		</div>
+
+		<!--for List, describe the paging and filter supported fields -->
+		
+
+
+		<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a>
+
+		
+		<a name="Delete">
+			</a><h3 class="ui-widget-header ui-state-active" style="margin: 20px"><a name="Delete">Delete
+		</a>
+		</h3>
+		<script>
+                                                				$('#anchors').append($('<li><a href="#Delete">Delete<a></li>'));
+                                                			</script>
+
+		<div style="margin-left: 20px;">
+			<span class="param_name">Request:</span><br>
+			<br>
+
+			<div class="ui-widget-header dashed_box" style="overflow-y: auto">
+
+				
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th>Method:</th>
+						<td style="color: rgb(212, 63, 58);">DELETE</td>
+					</tr>
+
+					
+					<tr>
+						<th>URI:</th>
+						<td>https://10.126.109.121:9060/ers/config/sgt/{id}</td>
+					</tr>
+					<tr id="acceptHeader_Delete"><th class="param_name">HTTP 'Content-Type' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'Accept' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'ERS-Media-Type' Header (Not Mandatory):</th><td>trustsec.sgt.1.2</td></tr><tr><th class="param_name">HTTP 'X-CSRF-TOKEN' Header (Required Only if Enabled from GUI):</th><td style="color: rgb(46, 109, 164);">The Token value from the GET X-CSRF-TOKEN fetch request</td></tr>
+					
+					<tr>
+						<th class="param_name">Bulk Support:</th>
+						<td>Operation 'Delete' can be used within Bulk Request.</td>
+					</tr>
+					
+					
+					
+				</tbody></table>
+				<script>
+           				var headerData = getHttpHeaderData("trustsec.sgt", "https://10.126.109.121:9060/ers/config/sgt/{id}",
+           						"1.2","DELETE","Delete");
+           				
+           				var entry1 = "<th class='param_name'>" + headerData[0] + "</th><td>" + headerData[1] + "</td>";
+           				
+						var entry2 = "<tr><th class='param_name'>" + headerData[2] + "</th><td>" + headerData[3] + "</td></tr>";
+						
+						var entry3 = "<tr><th class='param_name'>" + headerData[4] + "</th><td>" + headerData[5] + "</td></tr>";
+           				
+						var entry4 = "<tr><th class='param_name'>" + headerData[6] + "</th><td>" + headerData[7] + "</td></tr>";
+			
+           				
+           				$("#acceptHeader_Delete").html(entry1);
+           				$("#acceptHeader_Delete").after(entry4);
+           				$("#acceptHeader_Delete").after(entry3);
+           				$("#acceptHeader_Delete").after(entry2);
+           				
+           				
+			    </script>
+				<br> <span class="param_name" id="content_title_Delete">Request Content:</span>
+				<pre class="prettyprint prettyprinted" id="content_Delete" style=""><span class="pln">N</span><span class="pun">/</span><span class="pln">A</span></pre>
+				
+				<script>
+			                                                							getContentData("sgt", "https://10.126.109.121:9060/ers/config/sgt/{id}", "1.2","DELETE", "#content_title_Delete","#content_Delete");
+			                                                						</script>
+				
+
+
+			</div>
+			<br> <span class="param_name">Response:</span> (N/A)<br><br>
+			<div class="ui-widget-header" style="margin-right: 20px; margin-left: 40px; border: 1px dashed; padding: 10px; overflow-y: auto">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr><th class="param_name">HTTP Status:</th>
+					<td>204 (No Content)</td>
+				</tr></tbody></table>
+				<br> <span class="param_name">Content:</span> <br>
+				<pre class="prettyprint prettyprinted" id="response_content_Delete" style=""><span class="pln">N</span><span class="pun">/</span><span class="pln">A</span></pre>
+				<script>
+					appendResultXml(
+							"N/A"
+							,"#response_content_Delete", "");
+				</script>
+			</div>
+		</div>
+
+		<!--for List, describe the paging and filter supported fields -->
+		
+
+
+		<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a>
+
+		
+		<a name="Create">
+			</a><h3 class="ui-widget-header ui-state-active" style="margin: 20px"><a name="Create">Create
+		</a>
+		</h3>
+		<script>
+                                                				$('#anchors').append($('<li><a href="#Create">Create<a></li>'));
+                                                			</script>
+
+		<div style="margin-left: 20px;">
+			<span class="param_name">Request:</span><br>
+			<br>
+
+			<div class="ui-widget-header dashed_box" style="overflow-y: auto">
+
+				
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th>Method:</th>
+						<td style="color: rgb(76, 174, 76);">POST</td>
+					</tr>
+
+					
+					<tr>
+						<th>URI:</th>
+						<td>https://10.126.109.121:9060/ers/config/sgt</td>
+					</tr>
+					<tr id="acceptHeader_Create"><th class="param_name">HTTP 'Content-Type' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'Accept' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'ERS-Media-Type' Header (Not Mandatory):</th><td>trustsec.sgt.1.2</td></tr><tr><th class="param_name">HTTP 'X-CSRF-TOKEN' Header (Required Only if Enabled from GUI):</th><td style="color: rgb(46, 109, 164);">The Token value from the GET X-CSRF-TOKEN fetch request</td></tr>
+					
+					<tr>
+						<th class="param_name">Bulk Support:</th>
+						<td>Operation 'Create' can be used within Bulk Request.</td>
+					</tr>
+					
+					
+					
+					<tr>
+						<th class="param_name">Additional Information:</th>
+						<td>Generation Id is a read Only attribute hence any values that would be sent in the request would be ignored.value '-1' , value will be auto generated according trustsec settings ranges only for , it can be Create opration.</td>
+					</tr>
+					
+				</tbody></table>
+				<script>
+           				var headerData = getHttpHeaderData("trustsec.sgt", "https://10.126.109.121:9060/ers/config/sgt",
+           						"1.2","POST","Create");
+           				
+           				var entry1 = "<th class='param_name'>" + headerData[0] + "</th><td>" + headerData[1] + "</td>";
+           				
+						var entry2 = "<tr><th class='param_name'>" + headerData[2] + "</th><td>" + headerData[3] + "</td></tr>";
+						
+						var entry3 = "<tr><th class='param_name'>" + headerData[4] + "</th><td>" + headerData[5] + "</td></tr>";
+           				
+						var entry4 = "<tr><th class='param_name'>" + headerData[6] + "</th><td>" + headerData[7] + "</td></tr>";
+			
+           				
+           				$("#acceptHeader_Create").html(entry1);
+           				$("#acceptHeader_Create").after(entry4);
+           				$("#acceptHeader_Create").after(entry3);
+           				$("#acceptHeader_Create").after(entry2);
+           				
+           				
+			    </script>
+				<br> <span class="param_name" id="content_title_Create">Request Content:</span>
+				<pre class="prettyprint prettyprinted" id="content_Create" style=""><span class="pln">XML
+</span><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">sgt xmlns</span><span class="pun">:</span><span class="pln">ns0</span><span class="pun">=</span><span class="str">"trustsec.ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xs</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns1</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ers</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> description</span><span class="pun">=</span><span class="str">"description"</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"id"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"name"</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="str">&lt;propogateToApic&gt;</span><span class="kwd">false</span><span class="pun">&lt;/</span><span class="pln">propogateToApic</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="str">&lt;value&gt;</span><span class="lit">2</span><span class="pun">&lt;/</span><span class="pln">value</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">sgt</span><span class="pun">&gt;</span><span class="pln">
+
+JSON
+</span><span class="pun">{</span><span class="pln">
+  </span><span class="str">"Sgt"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"id"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"name"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"value"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"propogateToApic"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+				
+				<script>
+			                                                							getContentData("sgt", "https://10.126.109.121:9060/ers/config/sgt", "1.2","POST", "#content_title_Create","#content_Create");
+			                                                						</script>
+				
+
+
+			</div>
+			<br> <span class="param_name">Response:</span> (N/A)<br><br>
+			<div class="ui-widget-header" style="margin-right: 20px; margin-left: 40px; border: 1px dashed; padding: 10px; overflow-y: auto">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr><th class="param_name">HTTP Status:</th>
+					<td>201 (Created)</td>
+				</tr></tbody></table>
+				<br> <span class="param_name">Content:</span> <br>
+				<pre class="prettyprint prettyprinted" id="response_content_Create" style=""><span class="pln">N</span><span class="pun">/</span><span class="pln">A</span></pre>
+				<script>
+					appendResultXml(
+							"N/A"
+							,"#response_content_Create", "");
+				</script>
+			</div>
+		</div>
+
+		<!--for List, describe the paging and filter supported fields -->
+		
+
+
+		<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a>
+
+		
+		<a name="Get-All">
+			</a><h3 class="ui-widget-header ui-state-active" style="margin: 20px"><a name="Get-All">Get-All
+		</a>
+		</h3>
+		<script>
+                                                				$('#anchors').append($('<li><a href="#Get-All">Get-All<a></li>'));
+                                                			</script>
+
+		<div style="margin-left: 20px;">
+			<span class="param_name">Request:</span><br>
+			<br>
+
+			<div class="ui-widget-header dashed_box" style="overflow-y: auto">
+
+				
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th>Method:</th>
+						<td style="color: rgb(46, 109, 164);">GET</td>
+					</tr>
+
+					
+					<tr>
+						<th>URI:</th>
+						<td>https://10.126.109.121:9060/ers/config/sgt</td>
+					</tr>
+					<tr id="acceptHeader_Get-All"><th class="param_name">HTTP 'Content-Type' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'Accept' Header:</th><td>application/xml  |  application/json</td></tr><tr><th class="param_name">HTTP 'ERS-Media-Type' Header (Not Mandatory):</th><td>trustsec.sgt.1.2</td></tr><tr><th class="param_name">HTTP 'X-CSRF-TOKEN' Header (Required Only if Enabled from GUI):</th><td>fetch</td></tr>
+					
+					
+					
+				</tbody></table>
+				<script>
+           				var headerData = getHttpHeaderData("trustsec.sgt", "https://10.126.109.121:9060/ers/config/sgt",
+           						"1.2","GET","Get-All");
+           				
+           				var entry1 = "<th class='param_name'>" + headerData[0] + "</th><td>" + headerData[1] + "</td>";
+           				
+						var entry2 = "<tr><th class='param_name'>" + headerData[2] + "</th><td>" + headerData[3] + "</td></tr>";
+						
+						var entry3 = "<tr><th class='param_name'>" + headerData[4] + "</th><td>" + headerData[5] + "</td></tr>";
+           				
+						var entry4 = "<tr><th class='param_name'>" + headerData[6] + "</th><td>" + headerData[7] + "</td></tr>";
+			
+           				
+           				$("#acceptHeader_Get-All").html(entry1);
+           				$("#acceptHeader_Get-All").after(entry4);
+           				$("#acceptHeader_Get-All").after(entry3);
+           				$("#acceptHeader_Get-All").after(entry2);
+           				
+           				
+			    </script>
+				<br> <span class="param_name" id="content_title_Get-All">Request Content:</span>
+				<pre class="prettyprint prettyprinted" id="content_Get-All" style=""><span class="pln">N</span><span class="pun">/</span><span class="pln">A</span></pre>
+				
+				<script>
+			                                                							getContentData("sgt", "https://10.126.109.121:9060/ers/config/sgt", "1.2","GET", "#content_title_Get-All","#content_Get-All");
+			                                                						</script>
+				
+
+
+			</div>
+			<br> <span class="param_name">Response:</span> (SearchResult)<br><br>
+			<div class="ui-widget-header" style="margin-right: 20px; margin-left: 40px; border: 1px dashed; padding: 10px; overflow-y: auto">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr><th class="param_name">HTTP Status:</th>
+					<td>200 (OK)</td>
+				</tr></tbody></table>
+				<br> <span class="param_name">Content:</span> <br>
+				<pre class="prettyprint prettyprinted" id="response_content_Get-All" style=""><span class="pln">XML
+</span><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">searchResult xmlns</span><span class="pun">:</span><span class="pln">ns0</span><span class="pun">=</span><span class="str">"v2.ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns1</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ers</span><span class="pun">-</span><span class="pln">v2</span><span class="pun">=</span><span class="str">"ers-v2"</span><span class="pln"> total</span><span class="pun">=</span><span class="str">"2"</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">nextPage rel</span><span class="pun">=</span><span class="str">"next"</span><span class="pln"> href</span><span class="pun">=</span><span class="str">"link-to-next-page"</span><span class="pln"> type</span><span class="pun">=</span><span class="str">"application/xml"</span><span class="pun">/&gt;</span><span class="pln">
+   </span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">previousPage rel</span><span class="pun">=</span><span class="str">"previous"</span><span class="pln"> href</span><span class="pun">=</span><span class="str">"link-to-previous-page"</span><span class="pln"> type</span><span class="pun">=</span><span class="str">"application/xml"</span><span class="pun">/&gt;</span><span class="pln">
+   </span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resources</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;</span><span class="pln">ns1</span><span class="pun">:</span><span class="pln">resource description</span><span class="pun">=</span><span class="str">"description1"</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"id1"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"name1"</span><span class="pun">/&gt;</span><span class="pln">
+      </span><span class="pun">&lt;</span><span class="pln">ns1</span><span class="pun">:</span><span class="pln">resource description</span><span class="pun">=</span><span class="str">"description2"</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"id2"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"name2"</span><span class="pun">/&gt;</span><span class="pln">
+   </span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resources</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">searchResult</span><span class="pun">&gt;</span><span class="pln">
+
+JSON
+</span><span class="pun">{</span><span class="pln">
+  </span><span class="str">"SearchResult"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"total"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"resources"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"id1"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"name1"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description1"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"id2"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"name2"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description2"</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln"> </span><span class="pun">],</span><span class="pln">
+    </span><span class="str">"nextPage"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"rel"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"next"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"href"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"link-to-next-page"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"type"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"application/xml"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln">
+    </span><span class="str">"previousPage"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"rel"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"previous"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"href"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"link-to-previous-page"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"type"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"application/xml"</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+				<script>
+					appendResultXml(
+							"ers.searchresult"
+							,"#response_content_Get-All", "");
+				</script>
+			</div>
+		</div>
+
+		<!--for List, describe the paging and filter supported fields -->
+		
+		<br>
+		<br>
+		 
+                <div style="margin-left: 20px;">
+                        <span class="param_name">Supported Filter and Sorting Fields:</span><br>
+                        <br>
+
+                        <div class="ui-widget-header dashed_box" style="overflow-y: auto">
+                                
+                                <pre class="prettyprint prettyprinted" style=""><span class="typ">Filter</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">name</span><span class="pun">,</span><span class="pln"> description</span><span class="pun">,</span><span class="pln"> value</span><span class="pun">]</span></pre>
+                                
+                                
+                                <pre class="prettyprint prettyprinted" style=""><span class="typ">Sorting</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">name</span><span class="pun">,</span><span class="pln"> description</span><span class="pun">,</span><span class="pln"> value</span><span class="pun">]</span></pre>
+                                
+                        </div>
+
+                </div>
+                
+		
+
+
+		<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a>
+
+		
+
+
+
+		<!--VERSION-->
+		
+		<a name="version"></a>
+		<h3 class="ui-widget-header ui-state-active" style="margin: 20px">Get
+			Version</h3>
+
+
+		<div style="margin-left: 20px;">
+			<span class="param_name">Request:</span><br>
+			<br>
+
+			<div class="ui-widget-header dashed_box" style="overflow-y: auto">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th class="param_name">Method:</th>
+						<td style="color: rgb(46, 109, 164);">GET</td>
+					</tr>
+
+					
+					<tr>
+						<th class="param_name">URI:</th>
+						<td>https://10.126.109.121:9060/ers/config/sgt/versioninfo</td>
+					</tr>
+					<tr id="acceptHeader_GetVersion"><th class="param_name">HTTP 'Content-Type' Header:</th><td>application/xml  |  application/json</td></tr>
+					<script>
+			                                                				  var headerData = getHttpHeaderData("trustsec.sgt", "https://10.126.109.121:9060/ers/config/sgt/versioninfo", "1.2","GET","Get-Version");
+			                                                				  var entry = "<th class='param_name'>"+headerData[0] + "</th><td>"+headerData[1]+"</td>";
+			                                                				  $("#acceptHeader_GetVersion").html(entry);
+			                                                			</script>
+				</tbody></table>
+				<br> <span class="param_name" id="content_title_GetVersion"> </span>
+				<pre class="prettyprint prettyprinted" id="content_GetVersion" style=""><span class="pln">			                                                			
+			                                                			</span></pre>
+				<script>
+					                                                			//$("#scheme").text(data);
+			                                                					
+			                                                			</script>
+			</div>
+			<br> <span class="param_name">Response:</span> (Version Info)<br><br>
+			<div class="ui-widget-header dashed_box">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th class="param_name">HTTP Status:</th>
+						<td>200 (OK)</td>
+					</tr>
+				</tbody></table>
+				<br> <span class="param_name">Content:</span> <br>
+				<pre class="prettyprint prettyprinted" id="response_content_getversion" style=""><span class="pln">XML
+</span><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">versionInfo xmlns</span><span class="pun">:</span><span class="pln">ns0</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xs</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="str">&lt;currentServerVersion&gt;</span><span class="lit">1.0</span><span class="pun">&lt;/</span><span class="pln">currentServerVersion</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;</span><span class="pln">link rel</span><span class="pun">=</span><span class="str">"self"</span><span class="pln"> href</span><span class="pun">=</span><span class="str">"link"</span><span class="pln"> type</span><span class="pun">=</span><span class="str">"application/xml"</span><span class="pun">/&gt;</span><span class="pln">
+   </span><span class="str">&lt;supportedVersions&gt;</span><span class="lit">0.9</span><span class="pun">,</span><span class="lit">0.8</span><span class="pun">&lt;/</span><span class="pln">supportedVersions</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">versionInfo</span><span class="pun">&gt;</span><span class="pln">
+
+JSON
+</span><span class="pun">{</span><span class="pln">
+  </span><span class="str">"VersionInfo"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"currentServerVersion"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"1.0"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"supportedVersions"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"0.9,0.8"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"link"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"rel"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"self"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"href"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"link"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"type"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"application/xml"</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+				<script>
+																														appendResultXml("ers.versioninfo","#response_content_getversion", "");
+																														$('#anchors').append($('<li><a href="#version">Get Version<a></li>'));
+																													</script>
+			</div>
+
+
+		</div>
+		<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a>
+
+		<!--VERSION END-->
+
+		<!--BULK-->
+
+		
+		<a name="bulk"></a>
+		<h3 class="ui-widget-header ui-state-active" style="margin: 20px">Bulk
+			Request</h3>
+
+
+		<div style="margin-left: 20px;">
+			<span class="param_name">Request:</span><br>
+			<br>
+
+			<div class="ui-widget-header dashed_box" style="overflow-y: auto">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th class="param_name">Method:</th>
+						<td style="color: rgb(238, 162, 54);">PUT</td>
+					</tr>
+
+					
+					<tr>
+						<th class="param_name">URI:</th>
+						<td>https://10.126.109.121:9060/ers/config/sgt/bulk/submit</td>
+					</tr>
+					<tr id="acceptHeader_bulk"><th class="param_name">HTTP 'Content-Type' Header:</th><td>application/xml  |  application/json</td></tr>
+					<script>
+			                                                				  var headerData = getHttpHeaderData("trustsec.sgtbulkrequest", "https://10.126.109.121:9060/ers/config/sgt/bulk/submit", "1.2","GET","Bulk-Request");
+			                                                				  var entry = "<th class='param_name'>"+headerData[0] + "</th><td>"+headerData[1]+"</td>";
+			                                                				  $("#acceptHeader_bulk").html(entry);
+			                                                			</script>
+				</tbody></table>
+				<br>
+
+
+				<script>
+                      fetchXmlContent("#request_content_title_bulk","#request_content_bulk", "create","trustsec.sgt","true");
+				 </script>
+
+
+				<span class="param_name" id="request_content_title_bulk">Request Content:</span>
+				<pre class="prettyprint prettyprinted" id="request_content_bulk" style=""><span class="pln">XML
+</span><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pln"> standalone</span><span class="pun">=</span><span class="str">"yes"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgtBulkrequest operationType</span><span class="pun">=</span><span class="str">"create"</span><span class="pln"> resourceMediaType</span><span class="pun">=</span><span class="str">"vnd.com.cisco.ise.trustsec.sgt.1.0+xml"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns6</span><span class="pun">=</span><span class="str">"sxp.ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns5</span><span class="pun">=</span><span class="str">"trustsec.ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns8</span><span class="pun">=</span><span class="str">"network.ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns7</span><span class="pun">=</span><span class="str">"anc.ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ers</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xs</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">ns4</span><span class="pun">=</span><span class="str">"identity.ers.ise.cisco.com"</span><span class="pun">&gt;</span><span class="pln">
+    </span><span class="pun">&lt;</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">resourcesList</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt description</span><span class="pun">=</span><span class="str">"bulk demo sgt"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"sgt0"</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;generationId&gt;</span><span class="lit">0</span><span class="pun">&lt;/</span><span class="pln">generationId</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;value&gt;</span><span class="lit">2</span><span class="pun">&lt;/</span><span class="pln">value</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;/</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt description</span><span class="pun">=</span><span class="str">"bulk demo sgt"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"sgt1"</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;generationId&gt;</span><span class="lit">0</span><span class="pun">&lt;/</span><span class="pln">generationId</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;value&gt;</span><span class="lit">3</span><span class="pun">&lt;/</span><span class="pln">value</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;/</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt description</span><span class="pun">=</span><span class="str">"bulk demo sgt"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"sgt2"</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;generationId&gt;</span><span class="lit">0</span><span class="pun">&lt;/</span><span class="pln">generationId</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;value&gt;</span><span class="lit">4</span><span class="pun">&lt;/</span><span class="pln">value</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;/</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt description</span><span class="pun">=</span><span class="str">"bulk demo sgt"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"sgt3"</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;generationId&gt;</span><span class="lit">0</span><span class="pun">&lt;/</span><span class="pln">generationId</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;value&gt;</span><span class="lit">5</span><span class="pun">&lt;/</span><span class="pln">value</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;/</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt description</span><span class="pun">=</span><span class="str">"bulk demo sgt"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"sgt4"</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;generationId&gt;</span><span class="lit">0</span><span class="pun">&lt;/</span><span class="pln">generationId</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;value&gt;</span><span class="lit">6</span><span class="pun">&lt;/</span><span class="pln">value</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;/</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgt</span><span class="pun">&gt;</span><span class="pln">
+    </span><span class="pun">&lt;/</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">resourcesList</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">ns5</span><span class="pun">:</span><span class="pln">sgtBulkrequest</span><span class="pun">&gt;</span><span class="pln">
+
+JSON
+</span><span class="pun">{</span><span class="pln">
+  </span><span class="str">"SgtBulkRequest"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"operationType"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"create"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"resourceMediaType"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"vnd.com.cisco.ise.trustsec.sgt.1.0+xml"</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+
+			</div>
+			<br> <span class="param_name">Response:</span><br><br>
+			<div class="ui-widget-header dashed_box">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th class="param_name">HTTP Status:</th>
+						<td>204 (No Content)</td>
+					</tr>
+				</tbody></table>
+				<br> <span class="param_name">Content:</span> <br>
+				<pre class="prettyprint prettyprinted" id="response_content_bulk" style=""><span class="pln">N</span><span class="pun">/</span><span class="pln">A</span></pre>
+				<script>
+					appendResultXml("N/A","#response_content_bulk", "");
+					$('#anchors').append($('<li><a href="#bulk">Bulk Request<a></li>'));
+				</script>
+			</div>
+
+
+		</div>
+		<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a>
+
+
+
+		<!-- BULK STATUS -->
+
+
+		<h3 class="ui-widget-header ui-state-active" style="margin: 20px">
+			Monitor Bulk Status<a name="bulkstatus"></a>
+		</h3>
+
+
+		<div style="margin-left: 20px;">
+			<span class="param_name">Request:</span><br>
+			<br>
+
+			<div class="ui-widget-header dashed_box" style="overflow-y: auto">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th class="param_name">Method:</th>
+						<td style="color: rgb(46, 109, 164);">GET</td>
+					</tr>
+
+					
+					<tr>
+						<th class="param_name">URI:</th>
+						<td>https://10.126.109.121:9060/ers/config/sgt/bulk/{bulkid}</td>
+					</tr>
+					<tr id="acceptHeader_bulkstatus"><th class="param_name">HTTP 'Content-Type' Header:</th><td>application/xml  |  application/json</td></tr>
+					<script>
+			                                                				  var headerData = getHttpHeaderData("ers.bulkstatus", "https://10.126.109.121:9060/ers/config/sgt/bulk/{bulkid}", "1.2","GET","Get-Bulk-Status");
+			                                                				  var entry = "<th class='param_name'>"+headerData[0] + "</th><td>"+headerData[1]+"</td>";
+			                                                				  $("#acceptHeader_bulkstatus").html(entry);
+			                                                			</script>
+				</tbody></table>
+				<br> <span class="param_name" id="request_content_title_bulkstatus">Request Content:</span>
+				<pre id="request_content_bulkstatus">N/A</pre>
+
+			</div>
+			<br> <span class="param_name">Response:</span><br><br>
+			<div class="ui-widget-header dashed_box">
+				<table class="httpParams" cellspacing="0" cellpadding="0">
+					<tbody><tr>
+						<th>HTTP Status:</th>
+						<td>200 (OK)</td>
+					</tr>
+				</tbody></table>
+				<span class="param_name">Content:</span> <br>
+				<pre class="prettyprint prettyprinted" id="response_content_bulkstatus" style=""><span class="pln">XML
+</span><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">bulkStatus xmlns</span><span class="pun">:</span><span class="pln">ns0</span><span class="pun">=</span><span class="str">"ers.ise.cisco.com"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xs</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pln"> bulkId</span><span class="pun">=</span><span class="str">"1522993221105"</span><span class="pln"> executionStatus</span><span class="pun">=</span><span class="str">"COMPLETED"</span><span class="pln"> failCount</span><span class="pun">=</span><span class="str">"0"</span><span class="pln"> mediaType</span><span class="pun">=</span><span class="str">""</span><span class="pln"> operationType</span><span class="pun">=</span><span class="str">"create"</span><span class="pln"> resourcesCount</span><span class="pun">=</span><span class="str">"5"</span><span class="pln"> startTime</span><span class="pun">=</span><span class="str">"Fri Apr 06 05:40:21 UTC 2018"</span><span class="pln"> successCount</span><span class="pun">=</span><span class="str">"5"</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourcesStatus</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourceStatus description</span><span class="pun">=</span><span class="str">"description..."</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"1234454324"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"resource1"</span><span class="pln"> status</span><span class="pun">=</span><span class="str">"PENDING"</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="str">&lt;resourceExecutionStatus&gt;</span><span class="pln">PENDING</span><span class="pun">&lt;/</span><span class="pln">resourceExecutionStatus</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourceStatus</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourceStatus description</span><span class="pun">=</span><span class="str">"description..."</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"2343242342"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"resource2"</span><span class="pln"> status</span><span class="pun">=</span><span class="str">"PENDING"</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="str">&lt;resourceExecutionStatus&gt;</span><span class="pln">PENDING</span><span class="pun">&lt;/</span><span class="pln">resourceExecutionStatus</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourceStatus</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourceStatus description</span><span class="pun">=</span><span class="str">"description..."</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"4564566456"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"resource3"</span><span class="pln"> status</span><span class="pun">=</span><span class="str">"PENDING"</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="str">&lt;resourceExecutionStatus&gt;</span><span class="pln">PENDING</span><span class="pun">&lt;/</span><span class="pln">resourceExecutionStatus</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourceStatus</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourceStatus description</span><span class="pun">=</span><span class="str">"description..."</span><span class="pln"> id</span><span class="pun">=</span><span class="str">"6544566455"</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"resource4"</span><span class="pln"> status</span><span class="pun">=</span><span class="str">"PENDING"</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="str">&lt;resourceExecutionStatus&gt;</span><span class="pln">PENDING</span><span class="pun">&lt;/</span><span class="pln">resourceExecutionStatus</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourceStatus</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">resourcesStatus</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">ns0</span><span class="pun">:</span><span class="pln">bulkStatus</span><span class="pun">&gt;</span><span class="pln">
+
+JSON
+</span><span class="pun">{</span><span class="pln">
+  </span><span class="str">"BulkStatus"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"bulkId"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"1522993221114"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"mediaType"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">""</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"executionStatus"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"COMPLETED"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"operationType"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"create"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"startTime"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"Fri Apr 06 05:40:21 UTC 2018"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"resourcesCount"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">5</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"successCount"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">5</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"failCount"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"resourcesStatus"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"1234454324"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"resource1"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description..."</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"resourceExecutionStatus"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"PENDING"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"status"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"PENDING"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"2343242342"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"resource2"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description..."</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"resourceExecutionStatus"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"PENDING"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"status"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"PENDING"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"4564566456"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"resource3"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description..."</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"resourceExecutionStatus"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"PENDING"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"status"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"PENDING"</span><span class="pln">
+    </span><span class="pun">},</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"6544566455"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"resource4"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"description"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"description..."</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"resourceExecutionStatus"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"PENDING"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"status"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"PENDING"</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln"> </span><span class="pun">]</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+				<script>
+					appendResultXml("ers.bulkstatus","#response_content_bulkstatus", "");
+					$('#anchors').append($('<li><a href="#bulk">Monitor Bulk Status<a></li>'));
+				</script>
+			</div>
+
+
+		</div>
+		<a href="https://10.126.109.121:9060/ers/sdk#_" class="backtotop">Back to top</a>
+
+
+		
+
+		<!--BULK END-->
+
+
+		
+
+
+
+
+
+
+
+
+	</form>
+	<!-- </span> -->
+
+
+
+</div></span></div>
+	</div>
+
+	<div class="ui-layout-west ui-layout-pane ui-layout-pane-west" style="display: block; position: absolute; margin: 0px; left: 0px; right: auto; top: 63px; bottom: 0px; height: 476px; z-index: 0; width: 298px; visibility: visible;">
+		<div id="accordion1" class="basic ui-accordion ui-widget ui-helper-reset" role="tablist">
+
+
+
+
+
+			<h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" id="ui-accordion-accordion1-header-0" aria-controls="quickRefTree" aria-selected="false" tabindex="-1"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+				<a href="https://10.126.109.121:9060/ers/sdk#">Quick Reference</a>
+			</h3>
+			<div id="quickRefTree" class="demo ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom jstree jstree-0 jstree-default" style="padding-top: 0px; height: 329.4px; overflow: auto; display: none;" aria-labelledby="ui-accordion-accordion1-header-0" role="tabpanel" aria-expanded="false" aria-hidden="true"><ul><li id="quickRefTree1" name="Setting Up" url="pages/quickref_setting_up.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Setting
+							Up</a></li><li id="quickRefTree2" name="Successful Flows" url="pages/quickref_succ_flows.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Successful
+							Flows</a></li><li id="quickRefTree3" name="Fail Flows" url="pages/quickref_fail_flows.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Failure
+							Flows</a></li><li id="quickRefTree4" name="Request Headers" url="pages/quickref_request.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Request
+							Headers</a></li><li id="quickRefTree5" name="Response Headers" url="pages/quickref_response.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Response
+							Headers</a></li><li id="quickRefTree6" name="Error Codes" url="pages/quickref_errors.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Error Codes</a></li><li id="quickRefTree7" name="Searching a Resource" url="pages/quickref_searching.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Searching
+							a Resource</a></li><li id="quickRefTree8" name="Creating a Resource" url="pages/quickref_creating.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Creating a
+							Resource</a></li><li id="quickRefTree9" name="Updating a Resource" url="pages/quickref_updating.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Updating a
+							Resource</a></li><li id="quickRefTree10" name="Deleting a Resource" url="pages/quickref_deleting.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Deleting a
+							Resource</a></li><li id="quickRefTree11" name="Other Operations" url="pages/quickref_other_oper.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Other
+							Operations</a></li><li id="quickRefTree12" name="Bulk Operations" url="pages/quickref_bulk.jsp" class="jstree-last jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Bulk Operations</a></li></ul></div>
+
+
+
+			<h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-accordion-header-active ui-state-active ui-corner-top ui-accordion-icons" role="tab" id="ui-accordion-accordion1-header-1" aria-controls="apiTree" aria-selected="true" tabindex="0"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-s"></span>
+				<a href="https://10.126.109.121:9060/ers/sdk#">API Documentation</a>
+			</h3>
+			<div id="apiTree" class="demo ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom jstree jstree-2 jstree-focused jstree-default ui-accordion-content-active" style="padding-top: 0px; height: 329.4px; overflow: auto; display: block;" aria-labelledby="ui-accordion-accordion1-header-1" role="tabpanel" aria-expanded="true" aria-hidden="false"><ul><li url="pages/releaseNotes.html" release-note="0" name="ISE 2.0 Release Notes" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>ISE 2.0 Release Notes</a></li><li url="pages/releaseNotes.html" release-note="1" name="ISE 2.1 Release Notes" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>ISE 2.1 Release Notes</a></li><li url="pages/releaseNotes.html" release-note="2" name="ISE 2.2 Release Notes" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>ISE 2.2 Release Notes</a></li><li url="pages/releaseNotes.html" release-note="3" name="ISE 2.3 Release Notes" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>ISE 2.3 Release Notes</a></li><li id="anc.ancendpoint" name="ANC Endpoint" url="pages/api_resources.jsp?id=anc.ancendpoint" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>ANC Endpoint</a></li><li id="anc.ancpolicy" name="ANC Policy" url="pages/api_resources.jsp?id=anc.ancpolicy" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>ANC Policy</a></li><li id="identitystores.activedirectory" name="Active Directory" url="pages/api_resources.jsp?id=identitystores.activedirectory" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Active Directory</a></li><li id="identity.adminuser" name="Admin User" url="pages/api_resources.jsp?id=identity.adminuser" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Admin User</a></li><li id="portal.portalglobalsetting" name="Advanced Customization Global Setting" url="pages/api_resources.jsp?id=portal.portalglobalsetting" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Advanced Customization Global Setting</a></li><li id="policy.allowedprotocols" name="Allowed Protocols" url="pages/api_resources.jsp?id=policy.allowedprotocols" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Allowed Protocols</a></li><li id="policy.authorizationprofile" name="Authorization Profile" url="pages/api_resources.jsp?id=policy.authorizationprofile" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Authorization Profile</a></li><li id="portal.byodportal" name="BYOD Portal" url="pages/api_resources.jsp?id=portal.byodportal" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>BYOD Portal</a></li><li id="ca.certificatetemplate" name="Certificate Template" url="pages/api_resources.jsp?id=ca.certificatetemplate" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Certificate Template</a></li><li id="irf.threat" name="Clear Threats and vulnerabilities" url="pages/api_resources.jsp?id=irf.threat" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Clear Threats and vulnerabilities</a></li><li id="network.downloadableacl" name="Downloadable ACL" url="pages/api_resources.jsp?id=network.downloadableacl" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Downloadable ACL</a></li><li id="trustsec.egressmatrixcell" name="Egress Matrix Cell" url="pages/api_resources.jsp?id=trustsec.egressmatrixcell" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Egress Matrix Cell</a></li><li id="identity.endpoint" name="End Point" url="pages/api_resources.jsp?id=identity.endpoint" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>End Point</a></li><li id="ca.endpointcert" name="End Point Certificates" url="pages/api_resources.jsp?id=ca.endpointcert" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>End Point Certificates</a></li><li id="identity.endpointgroup" name="EndPoints Identity Group" url="pages/api_resources.jsp?id=identity.endpointgroup" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>EndPoints Identity Group</a></li><li id="network.externalradiusserver" name="External Radius Server" url="pages/api_resources.jsp?id=network.externalradiusserver" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>External Radius Server</a></li><li id="identity.guestlocation" name="Guest Location" url="pages/api_resources.jsp?id=identity.guestlocation" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Guest Location</a></li><li id="identity.guestsmtpnotificationsettings" name="Guest Smtp Notification Configuration" url="pages/api_resources.jsp?id=identity.guestsmtpnotificationsettings" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Guest Smtp Notification Configuration</a></li><li id="portal.guestssid" name="Guest Ssid" url="pages/api_resources.jsp?id=portal.guestssid" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Guest Ssid</a></li><li id="identity.guesttype" name="Guest Type" url="pages/api_resources.jsp?id=identity.guesttype" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Guest Type</a></li><li id="identity.guestuser" name="Guest User" url="pages/api_resources.jsp?id=identity.guestuser" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Guest User</a></li><li id="portal.hotspotportal" name="Hotspot Portal" url="pages/api_resources.jsp?id=portal.hotspotportal" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Hotspot Portal</a></li><li id="trustsec.sgmapping" name="IP To SGT Mapping" url="pages/api_resources.jsp?id=trustsec.sgmapping" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>IP To SGT Mapping</a></li><li id="trustsec.sgmappinggroup" name="IP To SGT Mapping Group" url="pages/api_resources.jsp?id=trustsec.sgmappinggroup" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>IP To SGT Mapping Group</a></li><li id="feature.service" name="ISE Service Information" url="pages/api_resources.jsp?id=feature.service" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>ISE Service Information</a></li><li id="identity.identitygroup" name="Identity Group" url="pages/api_resources.jsp?id=identity.identitygroup" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Identity Group</a></li><li id="identitystores.idstoresequence" name="Identity Sequence" url="pages/api_resources.jsp?id=identitystores.idstoresequence" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Identity Sequence</a></li><li id="identity.internaluser" name="Internal User" url="pages/api_resources.jsp?id=identity.internaluser" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Internal User</a></li><li id="portal.mydeviceportal" name="My Device Portal" url="pages/api_resources.jsp?id=portal.mydeviceportal" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>My Device Portal</a></li><li id="provisioning.nspprofile" name="Native Supplicant Profile" url="pages/api_resources.jsp?id=provisioning.nspprofile" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Native Supplicant Profile</a></li><li id="network.networkdevice" name="Network Device" url="pages/api_resources.jsp?id=network.networkdevice" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Network Device</a></li><li id="network.networkdevicegroup" name="Network Device Group" url="pages/api_resources.jsp?id=network.networkdevicegroup" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Network Device Group</a></li><li id="deploy.node" name="Node Details" url="pages/api_resources.jsp?id=deploy.node" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Node Details</a></li><li id="deploy.sessionservicenode" name="PSN Node Details with Radius Service" url="pages/api_resources.jsp?id=deploy.sessionservicenode" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>PSN Node Details with Radius Service</a></li><li id="identity.portal" name="Portal" url="pages/api_resources.jsp?id=identity.portal" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Portal</a></li><li id="portal.portaltheme" name="Portal Theme" url="pages/api_resources.jsp?id=portal.portaltheme" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Portal Theme</a></li><li id="identity.profilerprofile" name="Profiler Profile" url="pages/api_resources.jsp?id=identity.profilerprofile" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Profiler Profile</a></li><li id="network.radiusserversequence" name="Radius Server Sequence" url="pages/api_resources.jsp?id=network.radiusserversequence" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Radius Server Sequence</a></li><li id="identity.smsprovider" name="SMS Server" url="pages/api_resources.jsp?id=identity.smsprovider" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>SMS Server</a></li><li id="sxp.sxpconnections" name="SXP Connections" url="pages/api_resources.jsp?id=sxp.sxpconnections" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>SXP Connections</a></li><li id="sxp.sxplocalbindings" name="SXP Local Bindings" url="pages/api_resources.jsp?id=sxp.sxplocalbindings" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>SXP Local Bindings</a></li><li id="sxp.sxpvpns" name="SXP Vpns" url="pages/api_resources.jsp?id=sxp.sxpvpns" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>SXP Vpns</a></li><li id="trustsec.sgt" name="Security Groups" url="pages/api_resources.jsp?id=trustsec.sgt" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class="jstree-clicked"><ins class="jstree-icon">&nbsp;</ins>Security Groups</a></li><li id="trustsec.sgacl" name="Security Groups ACLs" url="pages/api_resources.jsp?id=trustsec.sgacl" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Security Groups ACLs</a></li><li id="trustsec.sgtvnvlan" name="Security Groups to Virtual Network to Subnet/IP Address Pool Name" url="pages/api_resources.jsp?id=trustsec.sgtvnvlan" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#" class=""><ins class="jstree-icon">&nbsp;</ins>Security Groups to Virtual Network to Subnet/IP Address Pool Name</a></li><li id="portal.selfregportal" name="Self Registered Portal" url="pages/api_resources.jsp?id=portal.selfregportal" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Self Registered Portal</a></li><li id="identity.sponsorgroup" name="Sponsor Group" url="pages/api_resources.jsp?id=identity.sponsorgroup" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Sponsor Group</a></li><li id="identity.sponsorgroupmember" name="Sponsor Group Member" url="pages/api_resources.jsp?id=identity.sponsorgroupmember" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Sponsor Group Member</a></li><li id="portal.sponsorportal" name="Sponsor Portal " url="pages/api_resources.jsp?id=portal.sponsorportal" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Sponsor Portal </a></li><li id="portal.sponsoredguestportal" name="Sponsored Guest Portal" url="pages/api_resources.jsp?id=portal.sponsoredguestportal" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Sponsored Guest Portal</a></li><li class="jstree-last jstree-closed"><ins class="jstree-icon">&nbsp;</ins><a><ins class="jstree-icon">&nbsp;</ins>Global Operations</a><ul>
+							<li id="globalexport.logsettings" name="Log Settings Configuration Export" url="pages/api_global_operations.jsp?id=globalexport.logsettings" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Log Settings Configuration Export</a></li>
+<li id="globalexport.rbacexport" name="Rbac Configuration Export" url="pages/api_global_operations.jsp?id=globalexport.rbacexport" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Rbac Configuration Export</a></li>
+<li id="globalexport.timesettings" name="Time Settings Configuration Export" url="pages/api_global_operations.jsp?id=globalexport.timesettings" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Time Settings Configuration Export</a></li>
+<li id="globalexport.vcs" name="Visibility Data Export" url="pages/api_global_operations.jsp?id=globalexport.vcs" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Visibility Data Export</a></li>
+<li id="trustsec.egresspolicypush" name="Egress Matrix Policy Push" url="pages/api_global_operations.jsp?id=trustsec.egresspolicypush" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Egress Matrix Policy Push</a></li>
+<li id="trustsec.egresspushmatrix" name="Matrix full Push" url="pages/api_global_operations.jsp?id=trustsec.egresspushmatrix" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Matrix full Push</a></li>
+<li id="trustsec.egresspushsgacl" name="SGACL Push" url="pages/api_global_operations.jsp?id=trustsec.egresspushsgacl" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>SGACL Push</a></li>
+<li id="trustsec.egresspushsgt" name="SGT Push" url="pages/api_global_operations.jsp?id=trustsec.egresspushsgt" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>SGT Push</a></li>
+<li id="trustsec.pushmonitoring" name="TrustSec Push Monitoring" url="pages/api_global_operations.jsp?id=trustsec.pushmonitoring" class="jstree-last jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>TrustSec Push Monitoring</a></li>
+
+						</ul></li></ul></div>
+
+
+			<h3 id="developerDrawer" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" aria-controls="developerTree" aria-selected="false" tabindex="-1"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+				<a href="https://10.126.109.121:9060/ers/sdk#">Developer Resources</a>
+			</h3>
+			<div id="developerTree" class="demo ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom jstree jstree-1 jstree-default" style="padding-top: 0px; display: none; height: 329.4px; overflow: auto;" aria-labelledby="developerDrawer" role="tabpanel" aria-expanded="false" aria-hidden="true"><ul><li id="developerTree1" name="Use Cases - curl scripts" url="pages/developer_usecases_preview.jsp" class="jstree-closed"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Use
+							Cases - curl scripts</a><ul>
+							<li id="usecases_getall" name="Use Cases &#39;Get All Users&#39; curl Linux script" url="pages/developer_usecases.jsp?id=get-all-users" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Get All Users</a></li>
+							<li id="usecases_search" name="Use Cases &#39;Search Users&#39; curl Linux script" url="pages/developer_usecases.jsp?id=search-users" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Search Users</a></li>
+							<li id="usecases_getbyid" name="Use Cases &#39;Get User By Id&#39; curl Linux script" url="pages/developer_usecases.jsp?id=get-user-by-id" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Get User By Id</a></li>
+							<li id="usecases_create" name="Use Cases &#39;Create User&#39; curl Linux script" url="pages/developer_usecases.jsp?id=create-user" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Create User</a></li>
+							<li id="usecases_update" name="Use Cases &#39;Update User&#39; curl Linux script" url="pages/developer_usecases.jsp?id=update-user" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Update User</a></li>
+							<li id="usecases_delete" name="Use Cases &#39;Delete User&#39; curl Linux script" url="pages/developer_usecases.jsp?id=delete-user" class="jstree-last jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Delete User</a></li>
+						</ul></li><li id="developerTree2" name="Use Cases - Python scripts" url="pages/developer_usecases_python_preview.jsp" class="jstree-closed"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Use
+							Cases - Python scripts</a><ul>
+							<li id="usecases_python_internaluser" name="Use Cases &#39;Internal Users&#39; Python" url="pages/developer_usecases_python_preview.jsp" class="jstree-closed"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Internal Users</a><ul>
+									<li id="usecases_get_all_internal_users" name="Use Cases &#39;Get all internal users&#39; Python script" url="pages/developer_usecases_python.jsp?id=get-all-internal-users" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Get All Users</a></li>
+									<li id="usecases_get_internal_user_by_id" name="Use Cases &#39;Get internal user by id&#39; Python script" url="pages/developer_usecases_python.jsp?id=get-internal-user-by-id" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Get User By ID</a></li>
+									<li id="usecases_create_internal_user" name="Use Cases &#39;Create internal user&#39; Python script" url="pages/developer_usecases_python.jsp?id=create-internal-user" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Create User</a></li>
+									<li id="usecases_change_password" name="Use Cases &#39;Change password&#39; Python script" url="pages/developer_usecases_python.jsp?id=change-password" class="jstree-last jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Change Password</a></li>
+								</ul></li>
+							<li id="usecases_python_ad" name="Use Cases &#39;Internal Users&#39; Python" url="pages/developer_usecases_python_preview.jsp" class="jstree-closed"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Active Directory</a><ul>
+									<li id="usecases_get_user_groups" name="Use Cases &#39;Get user groups&#39; Python script" url="pages/developer_usecases_python.jsp?id=get-user-groups" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Get User Groups</a></li>
+									<li id="usecases_is_user_member_of" name="Use Cases &#39;Is User Member Of Groups&#39; Python script" url="pages/developer_usecases_python.jsp?id=is-user-member-of" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Is User Member Of Groups</a></li>
+									<li id="usecases_get_groups_by_domain" name="Use Cases &#39;Get groups by domain&#39; Python script" url="pages/developer_usecases_python.jsp?id=get-groups-by-domain" class="jstree-last jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Get Groups By Domain</a></li>
+								</ul></li>
+							<li id="usecases_python_guest_user" name="Use Cases &#39;Guest Users&#39; Python" url="pages/developer_usecases_python_preview.jsp" class="jstree-last jstree-closed"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Guest Users</a><ul>
+									<li id="usecases_get_all_guest_user" name="Use Cases &#39;Get Guest Users&#39; Python script" url="pages/developer_usecases_python.jsp?id=get-all-guest-users" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Get All Guest Users </a></li>
+									<li id="usecases_get_guest_user_by_id" name="Use Cases &#39;Get Guest User By ID&#39; Python script" url="pages/developer_usecases_python.jsp?id=get-guest-user-by-id" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Get Guest User By ID </a></li>
+									<li id="usecases_create_guest_user" name="Use Cases &#39;Create Guest User&#39; Python script" url="pages/developer_usecases_python.jsp?id=create-guest-user" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Create Guest User</a></li>
+									<li id="usecases_reset_guest_password" name="Use Cases &#39;Reset/Change Guest Password&#39; Python script" url="pages/developer_usecases_python.jsp?id=reset-guest-password" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Reset Guest Password</a></li>
+								    <li id="usecases_suspend_guest_user" name="Use Cases &#39;Suspend Guest User&#39; Python script" url="pages/developer_usecases_python.jsp?id=suspend-guest-user" class="jstree-last jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Suspend Guest User</a></li>
+								</ul></li>
+						</ul></li><li id="developerTree3" name="Using Chrome Postman" url="pages/developer_poster.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Using Chrome
+							Postman</a></li><li id="developerTree4" name="Java Demo Application" url="pages/developer_java_demo_app.jsp" class="jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Java
+							Demo Application</a></li><li id="developerTree5" name="Downloads" url="pages/developer_downloads.jsp" class="jstree-last jstree-leaf"><ins class="jstree-icon">&nbsp;</ins><a href="https://10.126.109.121:9060/ers/sdk#"><ins class="jstree-icon">&nbsp;</ins>Downloads</a></li></ul></div>
+
+
+
+		</div>
+	</div>
+
+
+	<script type="text/javascript" class="source">
+		$(function() {
+			$.get("releaseNotes.json", function(data){
+				if(!data.length) return;
+// 				var menuItem = '<li ';
+// 				menuItem += 'url="pages/releaseNotes.html" release-note="0" name="'+data[0].title+'"><a href="#">';
+// 				menuItem += data[0].title;
+// 				menuItem += '</a>';
+// // 				if(data.length > 1) {
+// 					menuItem += '<ul>';
+					var menuItem = "";
+					for(var i=0;i<data.length;i++){
+						menuItem += '<li '
+						menuItem += 'url="pages/releaseNotes.html" release-note="'+i+'" name="'+data[i].title+'"><a href="#">';
+						menuItem += data[i].title;
+						menuItem += '</a></li>';
+					}
+// 					menuItem += '</ul>'
+// 				}
+// 				menuItem += '</li>';
+				if($('.ui-layout-west.ui-layout-pane #apiTree > ul > li:first-child').attr('url') != "pages/releaseNotes.html") {
+					$("#apiTree > ul").prepend(menuItem);
+				}
+				$("#apiTree").jstree({
+					"plugins" : [ "themes", "html_data", "ui" ]
+				}).bind("select_node.jstree", function(event, data) {
+					// `data.rslt.obj` is the jquery extended node that was clicked
+					console.log(data.rslt.obj)
+					contentChange(data.rslt.obj);
+				});
+			});
+			$("#quickRefTree").jstree({
+				"plugins" : [ "themes", "html_data", "ui" ]
+			}).bind("select_node.jstree", function(event, data) {
+				// `data.rslt.obj` is the jquery extended node that was clicked
+				contentChange(data.rslt.obj);
+			})
+			$("#quickRefTree").jstree("select_node", "#quickRefTree1");
+
+			$("#developerTree").jstree({
+				"plugins" : [ "themes", "html_data", "ui" ]
+			}).bind("select_node.jstree", function(event, data) {
+				// `data.rslt.obj` is the jquery extended node that was clicked
+				console.log(data.rslt.obj)
+				contentChange(data.rslt.obj);
+			});
+
+			$("#developerDrawer").click(function() {
+				$("#developerTree").jstree('open_all');
+			})
+
+		});
+
+		var contentChange = function(item) {
+			$(".ui-widget-header").html(item.attr("name"));
+			$("#currentReleaseNote").val(item.attr("release-note"));
+			debug(item.attr("url"));
+
+			location.hash = '#_';
+			$.get(item.attr("url"), function(data) {
+				$(".ui-layout-content").html(data)
+				$(".ui-layout-content.ui-widget-content").animate({
+					scrollTop : 0
+				}, "fast");
+			});
+		}
+
+		var debug = function(str) {
+			try {
+				console.info("ERS -> " + str);
+			} catch (e) {
+			}
+		}
+	</script>
+	<input type="hidden" id="currentReleaseNote" value="">
+
+
+<div id="jstree-marker" style="display: none;">»</div><div id="jstree-marker-line" style="display: none;"></div><div id="vakata-contextmenu"></div><div id="" class="ui-layout-resizer ui-layout-resizer-north ui-layout-resizer-open ui-layout-resizer-north-open" title="Resize" aria-disabled="false" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: n-resize; top: 57px; width: 1280px; height: 6px; left: 0px;"><div id="" class="ui-layout-toggler ui-layout-toggler-north ui-layout-toggler-open ui-layout-toggler-north-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 48px; height: 6px; left: 615px; top: 0px;"></div></div><div id="" class="ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open" title="Resize" aria-disabled="false" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: w-resize; left: 300px; height: 478px; width: 6px; top: 63px;"><div id="" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 6px; top: 214px; left: 0px;"></div></div></body></html>
