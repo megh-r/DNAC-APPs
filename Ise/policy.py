@@ -1534,7 +1534,6 @@ element.append(PageBreak())
 for i in exist:
     j="device%s"%i
     #print(j)
-    doHeading("home",h3)
     doHeading(DEVICES[j]['type'],h2)
     element.append(Spacer(1, 0.2 * inch))
     element.append(Paragraph("Management IP Address: %s"%DEVICES[j]['managementIpAddress'],style1))
