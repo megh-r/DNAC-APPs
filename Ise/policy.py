@@ -1423,12 +1423,16 @@ if debug==1:
 print("Generating PDF")
 import numpy as np
 from reportlab.lib.styles import ParagraphStyle as PS
+from reportlab.platypus import *
+from reportlab.lib.pagesizes import letter
 from reportlab.platypus import PageBreak
 from reportlab.platypus.paragraph import Paragraph
 from reportlab.platypus.doctemplate import PageTemplate, BaseDocTemplate
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.platypus.frames import Frame
 from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.lib import colors
 from reportlab.lib.units import cm
 
 class MyDocTemplate(BaseDocTemplate):
