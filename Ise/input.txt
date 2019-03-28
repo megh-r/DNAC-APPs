@@ -1,8 +1,8 @@
-ISE IP address - 10.104.55.38:9060
+ISE IP address - p.q.r.s:t
 Username - admin
 Password - xxxxx
 
-DNAC IP address - 10.104.55.37
+DNAC IP address - a.b.c.d
 Username - admin
 Password - xxxxx
 
