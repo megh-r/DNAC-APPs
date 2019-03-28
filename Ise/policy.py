@@ -288,7 +288,7 @@ def sgtlist(vrfnames,ip,cookie,devid,unknwnval):
     sgtvrf=[] #list of sgt's to display in vrf dataframe
     iplist=[] #list of ip's
     
-    #extracting sgt's and ip's
+   #extracting sgt's and ip's
     for i in range(len(responses)):
         if debug==1:
             print("\n SGTRESP: ",responses[i])
@@ -867,7 +867,7 @@ for i in range(0,len(responses)):
         print(responses[i])
     name.append(responses[i]['EgressMatrixCell']['name'])
     defaultRule.append(responses[i]['EgressMatrixCell']['defaultRule'])
-    print(responses[i]['EgressMatrixCell']['defaultRule'])
+    #print(responses[i]['EgressMatrixCell']['defaultRule'])
       
 #Removing columns that are not necessary
 del df['description']
@@ -1136,8 +1136,8 @@ for devid in deviceid:
                                     final_list.append([b1, c2, d3, e4])
                 else:
                     final_list.append([b1, c1, d1, e1])
-        else:
-            final_list.append([b, c, d, e])
+        #else:
+            #final_list.append([b, c, d, e])
 
     dfa2["device%s"%count] = pd.DataFrame(final_list, columns=['LGT', 'RGT', 'SGACL', 'ACLCONT'])
     dfa2["device%s"%count].drop_duplicates(keep="first",inplace=True)
@@ -1209,6 +1209,7 @@ for devid in deviceid:
     
     if unknwnval==1:
         del vrfnames[-1]
+    vrfnames.append("Global")
     
     dfa1["device%s"%count]=pd.DataFrame({"VRFNames":vrfnames})
         
@@ -1430,10 +1431,9 @@ from reportlab.platypus.paragraph import Paragraph
 from reportlab.platypus.doctemplate import PageTemplate, BaseDocTemplate
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.platypus.frames import Frame
-from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.units import cm
 from reportlab.lib.units import inch
 from reportlab.lib import colors
-from reportlab.lib.units import cm
 
 class MyDocTemplate(BaseDocTemplate):
     def __init__(self, filename, **kw):
@@ -1451,6 +1451,8 @@ class MyDocTemplate(BaseDocTemplate):
                 level = 0
             elif style == 'Heading2':
                 level = 1
+            elif style == 'Heading3':
+                level = 2
             else:
                 return
             E = [level, text, self.page]
@@ -1476,6 +1478,12 @@ h2 = PS(name = 'Heading2',
               leading = 16,
               alignment=1,
            fontName='Helvetica-Bold')
+h3 = PS(name = 'Heading3',
+              fontSize = 14,
+              leading = 16,
+              alignment=1,
+           fontName='Helvetica-Bold',
+           textColor = colors.red)
 
 element=[]
 
@@ -1485,7 +1493,8 @@ toc = TableOfContents()
 #toc.levelStyles = [h1, h2]
 toc.levelStyles = [
     PS(fontName='Times-Bold', fontSize=20, name='TOCHeading1', leftIndent=20, firstLineIndent=-20, spaceBefore=10, leading=16),
-    PS(fontSize=18, name='TOCHeading2', leftIndent=40, firstLineIndent=-20, spaceBefore=5, leading=12),
+    PS(fontSize=18, name='TOCHeading2', leftIndent=30, firstLineIndent=-20, spaceBefore=5, leading=12),
+    PS(fontSize=18, name='TOCHeading3', leftIndent=30, firstLineIndent=-20, spaceBefore=5, leading=12, textColor = colors.red),
 ]
 
 element.append(toc)
@@ -1500,20 +1509,24 @@ def doHeading(text,sty):
     #store the bookmark name on the flowable so afterFlowable can see this
     h._bookmarkName=bn
     element.append(h)
-    
-PS = ParagraphStyle
 
-style = ParagraphStyle(
+style = PS(
     name='Normal',
     fontName='Helvetica-Bold',
     fontSize=14,
     alignment=1
 )
-style1 = ParagraphStyle(
+style1 = PS(
     name='Normal',
     fontName='Helvetica',
     fontSize=10,
     alignment=1
+)
+style2 = PS(
+    name='Normal',
+    fontName='Helvetica',
+    fontSize=10,
+    alignment=0
 )
 
 a= np.array(df2)
@@ -1531,10 +1544,15 @@ doHeading("ISE",h1)
 element.append(Spacer(1, 0.2 * inch))
 element.append(t1)
 element.append(PageBreak())
+count=1
 for i in exist:
     j="device%s"%i
-    #print(j)
-    doHeading(DEVICES[j]['type'],h2)
+    m=str(count)+". "+DEVICES[j]['type']
+    if success[j]=="failed":
+        doHeading(m,h3)
+    else:
+        doHeading(m,h2)
+    count=count+1
     element.append(Spacer(1, 0.2 * inch))
     element.append(Paragraph("Management IP Address: %s"%DEVICES[j]['managementIpAddress'],style1))
     element.append(Spacer(1, 0.1 * inch))
@@ -1586,22 +1604,22 @@ for i in exist:
     element.append(Spacer(1, 0.1 * inch))
     element.append(t4)
     element.append(Spacer(1, 0.2 * inch))
-    element.append(Paragraph("Consistency checker information",style))
+    element.append(Paragraph("ISE/Device consistency comparison",style))
     element.append(Spacer(1, 0.2 * inch))
     li = ['DGT','SGT','SGACL','ACL_ISE','ACL_Device']
     b = np.array(li)
     #print(b)
     for l in out1[j]:
-        element.append(Paragraph(l,style1))
+        element.append(Paragraph(l,style2))
         element.append(Spacer(1, 0.1 * inch))
     element.append(Spacer(1, 0.2 * inch))
     for k in output1[j]:
         s=[]
-        print(k)
+        #print(k)
         dfb = k[isNaN(k['5.ACL_Device'])].index.values.astype(int)
-        print(dfb)
+        #print(dfb)
         dfb1=(k[isNaN(k['4.ACL_ISE'])].index.values.astype(int))
-        print(dfb1)
+        #print(dfb1)
         a= np.array(k)
        # print(a)
         p = np.vstack((b, a))
@@ -1612,11 +1630,11 @@ for i in exist:
                         ('FONTNAME',(0,0),(-1,0),'Helvetica-Bold')]))
         if dfb.size>0:
             for i in dfb:
-                print(i+1)
+                #print(i+1)
                 t5.setStyle(TableStyle([('BACKGROUND',(4,i+1),(4,i+1),colors.red)]))
         if dfb1.size>0:
             for j in dfb1:
-                print(j+1)
+                #print(j+1)
                 t5.setStyle(TableStyle([('BACKGROUND',(3,j+1),(3,j+1),colors.red)]))
         #print(t5)
         for ix in k.index:
@@ -1635,4 +1653,4 @@ for i in exist:
 doc = MyDocTemplate('table.pdf')    
 
 doc.multiBuild(element)
-print("table.pdf is ready to view")
+print('"table.pdf" is ready to view')
