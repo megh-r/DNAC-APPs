@@ -12,6 +12,4 @@ Run policy.py to generate a pdf containing the consistency report of the devices
 
 Points to be noted:
 
-table.pdf is the pdf generated from the code.
-input.txt has the login credentials of DNAC and ISE instance. Same format should be followed to enter login credentials.
-For detailed output of each function type 'yes' in debug mode.
+table.pdf is the pdf generated from the code. input.txt has the login credentials of DNAC and ISE instance. Same format should be followed to enter login credentials. For detailed output of each function type 'yes' in debug mode.
