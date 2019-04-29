@@ -1168,7 +1168,7 @@ for h,po,u,p,ep in zip(host,port,un,pw,en_pw):
     story.append(Spacer(1, 0.2 * inch))
     story.append(PageBreak())
     
-doc = MyDocTemplate('able.pdf')    
+doc = MyDocTemplate('teltable.pdf')    
 
 doc.multiBuild(story)
-print('"table.pdf" is ready to view')
+print('"teltable.pdf" is ready to view')
