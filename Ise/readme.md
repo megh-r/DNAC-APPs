@@ -21,3 +21,5 @@ For detailed output of each function type 'yes' in debug mode.
 
 telinput.txt has the login credentials of devices to telnet. Same format should be followed to enter login credentials.
 telinput1.txt has the login credentials of ISE and input to debug mode.
+
+ISE DNAC Network Devices Consistency Check is the document that explains procedure to be followed to generate the final pdf.
