@@ -1,0 +1,6 @@
+ISE IP address - a.b.c.d:e
+Username - xxxx
+Password - ******
+
+(Yes/No)
+Debug Mode - No
