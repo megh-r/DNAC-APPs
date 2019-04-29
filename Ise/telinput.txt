@@ -1,0 +1,17 @@
+HOST - a.b.c.d 
+PORT -  xx
+UN - ****
+PW - ****
+EN_PW - ****
+
+HOST - e.f.g.h 
+PORT -  xx
+UN - *****
+PW - ****
+EN_PW - ****
+
+HOST - i.j.k.l 
+PORT -  xx
+UN - ****
+PW - ****
+EN_PW - ****
