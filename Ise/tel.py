@@ -146,7 +146,7 @@ y=[]
 for x in f:
     y.append(x.split("-"))
 
-debug=y[9][1].strip()    #if debug option is yes then detailed output of every API call and steps of parsing the required data is
+debug=y[5][1].strip()    #if debug option is yes then detailed output of every API call and steps of parsing the required data is
 if debug.lower()=="yes":  #displayed
     debug=1
 else:
