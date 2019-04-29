@@ -13,8 +13,8 @@ Run tel.py to generate a pdf containing the cosistency report of the devices (by
 
 Points to be noted:
 
-table.pdf is the pdf generated from the policy.py code.
-teltable.pdf is the pdf generated from the tel.py code.
+"table.pdf" is the pdf generated from the policy.py code.
+"teltable.pdf" is the pdf generated from the tel.py code.
 
 input.txt has the login credentials of DNAC and ISE instance. Same format should be followed to enter login credentials.
 For detailed output of each function type 'yes' in debug mode.
